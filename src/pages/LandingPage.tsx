@@ -10,7 +10,7 @@ export default function LandingPage() {
             </div>
            <div className="flex z-10 items-center ">
            <div className='w-[600px] h-[566px]'>
-                <img src="src\assets\hero1.png" alt="heroIcon2"/>
+                <img src="/hero1.png" alt="heroIcon2"/>
                 </div>
            <div className="flex flex-col items-center">
             <div className="text-center">
@@ -24,7 +24,7 @@ export default function LandingPage() {
             </div>
             </div>
                 <div className='w-[600px] h-[566px]'>
-                <img src="src\assets\hero2.png" alt="heroIcon2"/>
+                <img src="/hero2.png" alt="heroIcon2"/>
                 </div>
            </div>
         </div>
