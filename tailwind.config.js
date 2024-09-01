@@ -7,7 +7,7 @@ export default {
   theme: {
     extend: {
       backgroundImage: {
-        'hero-pattern': "url('src/assets/bgImg.jpg')",
+        'hero-pattern': "url('src/assets/bgImg.jpg'),linear-gradient(90deg, rgba(9, 7, 10, 0.76) 0.26%, rgba(30, 45, 74, 0.76) 99.8%)"
       }
     },
   },
