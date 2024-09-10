@@ -70,7 +70,7 @@ export default function AccountSection() {
     return (
         <div className="flex flex-col gap-4 p-6">
             <p className="font-PostR text-white text-[20px] md:text-[24px] lg:text-[30px]">#Trending Game Passes</p>
-            <Tabs defaultValue="account" >
+            <Tabs defaultValue="BGMI" >
                 <TabsList className="mb-4">
                     <TabsTrigger value="BGMI">BGMI</TabsTrigger>
                     <TabsTrigger value="MLBB">MLBB</TabsTrigger>

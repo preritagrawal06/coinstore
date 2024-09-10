@@ -2,6 +2,7 @@ import AccountSection from "@/components/AccountSection";
 import GamePassSection from "../components/GamePassSection";
 import HeroSection from "../components/HeroSection";
 import AccessoriesSection from "@/components/AccessoriesSection";
+import Footer from "@/components/Footer";
 
 export default function LandingPage() {
     return (
@@ -10,6 +11,7 @@ export default function LandingPage() {
         <GamePassSection/>
         <AccountSection/>
         <AccessoriesSection/>
+        <Footer/>
        </div>
     )
 }
