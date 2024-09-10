@@ -1,4 +1,5 @@
-import Button from "./Button";
+import { Button } from "@/components/ui/button"
+import { ArrowRight } from "lucide-react"
 
 export default function HeroSection(){
     return(
@@ -19,8 +20,8 @@ export default function HeroSection(){
                 <p className="head1">Your Ultimate <span className="text-[#24FFF2]">Game Pass</span> Destination!</p>
             </div>
             <div className="z-10">
-               <Button name='Explore More'/>
-               <Button name='Browse Games'/>
+                <Button>Explore More <ArrowRight className="ml-2 h-4 w-4" /> </Button>
+                <Button>Browse Games <ArrowRight className="ml-2 h-4 w-4" /> </Button>
             </div>
             </div>
                 <div className='heroImg'>
