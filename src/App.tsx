@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import './App.css'
 import LandingPage from './pages/LandingPage';
+import Layout from './components/Layout';
+import CheckoutPage from './pages/CheckoutPage';
 
 function App() {
 
@@ -8,7 +9,10 @@ function App() {
     <>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<LandingPage />} />
+          <Route path="/" element={<Layout/>} >
+            <Route index element={<LandingPage />} />
+            <Route path='/checkout' element={<CheckoutPage/>}/>
+          </Route>
         </Routes>
       </BrowserRouter>
     </>

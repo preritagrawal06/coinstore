@@ -14,8 +14,8 @@ export default function PassCard({name,org,img}:CardVariable){
             </div>
             <div className="flex justify-between items-end p-3">
                 <div>
-                <p className="font-PostJb text-white text-[20px]">{name}</p>
-                <p className="font-PostR text-[16px] text-[#C1C1C1]">{org}</p>
+                <p className="subhead">{name}</p>
+                <p className="subtext1">{org}</p>
                 </div>
                 <Button variant={'primary'} size={'xs'}>Top Up</Button>
             </div>

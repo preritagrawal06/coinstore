@@ -14,8 +14,8 @@ export default function ItemCard({name,price,img}:CardVariable){
             </div>
             <div className="flex justify-between items-end p-3">
                 <div>
-                <p className="font-PostJb text-white text-[20px]">{name}</p>
-                <p className="font-PostSB text-[16px] text-[#C1C1C1]">Rs. {price}</p>
+                <p className="subhead">{name}</p>
+                <p className="subtext1">Rs. {price}</p>
                 </div>
                 <Button variant={'primary'} size={'xs'}>Coming Soon</Button>
             </div>

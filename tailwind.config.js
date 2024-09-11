@@ -7,6 +7,9 @@ export default {
   ],
   theme: {
   	extend: {
+		gridTemplateColumns:{
+			'3': 'repeat(auto-fit, minmax(150px, 1fr))'
+		},
   		backgroundImage: {
   			'hero-pattern': "url('/bgImg.jpg'),linear-gradient(90deg, rgba(9, 7, 10, 0.76) 0.26%, rgba(30, 45, 74, 0.76) 99.8%)"
   		},
