@@ -3,6 +3,7 @@ import LandingPage from './pages/LandingPage';
 import Layout from './components/Layout';
 import CheckoutPage from './pages/CheckoutPage';
 import SignIn from './pages/SignIn';
+import PaymentStatus from './pages/PaymentStatus'
 import SignUp from './pages/SignUp';
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
           <Route path="/" element={<Layout/>} >
             <Route index element={<LandingPage />} />
             <Route path='/checkout/:code' element={<CheckoutPage/>}/>
+            <Route path='/status' element={<PaymentStatus/>}/>
           </Route>
           <Route path='/signin' element={<SignIn/>}/>
           <Route path='/signup' element={<SignUp/>}/>
