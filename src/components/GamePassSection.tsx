@@ -1,7 +1,7 @@
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import PassCard from "./PassCard";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 
 export default function GamePassSection() {
     const responsive = {
@@ -33,37 +33,58 @@ export default function GamePassSection() {
 
     const data = [{
         ind: 1,
-        name: 'BGMI',
-        org: 'Tencent',
-        img_url: 'gamepass.jpg'
+        name: 'Mobile Legends',
+        org: 'Moonton',
+        img_url: 'mlbb.png',
+        sign:'mlbb'
     },
     {
         ind: 2,
-        name: 'BGMI2',
-        org: 'Tencent',
-        img_url: 'gamepass.jpg'
+        name: 'PUBG Global',
+        org: 'Krafton',
+        img_url: 'pubg.jpg',
+        sign:'pubgm'
     },
     {
         ind: 3,
-        name: 'BGMI3',
-        org: 'Tencent',
-        img_url: 'gamepass.jpg'
+        name: 'Genshin Impact',
+        org: 'MiHoYo',
+        img_url: 'genshin.jpg',
+        sign:'genshin'
     },
     {
         ind: 4,
-        name: 'BGMI4',
-        org: 'Tencent',
-        img_url: 'gamepass.jpg'
+        name: 'Clash of Clans',
+        org: 'Supercell',
+        img_url: 'coc.jpg',
+        sign:'clashofclans'
     }, {
         ind: 5,
-        name: 'BGMI5',
-        org: 'Tencent',
-        img_url: 'gamepass.jpg'
-    }, {
+        name: 'Honkai:Star Rail',
+        org: 'MiHoYo',
+        img_url: 'honkai.jpg',
+        sign:'honkai_star_rail'
+    }, 
+    {
         ind: 6,
-        name: 'BGMI6',
-        org: 'Tencent',
-        img_url: 'gamepass.jpg'
+        name: 'Clash Royale',
+        org: 'Supercell',
+        img_url: 'cor.jpg',
+        sign:'clashroyale'
+    }, 
+    {
+        ind: 7,
+        name: 'Farlight 84',
+        org: 'Lilith Games',
+        img_url: 'farlight.jpg',
+        sign:'farlight84'
+    },
+    {
+        ind: 8,
+        name: 'Supersus',
+        org: 'Lilith Games',
+        img_url: 'supersus.jpg',
+        sign:"super_sus"
     }
     ]
     return (
@@ -85,10 +106,10 @@ export default function GamePassSection() {
                 itemClass="carousel-item-padding-40-px"
             >
                 {data.map((x) => (
-                    <PassCard name={x.name} org={x.org} img={x.img_url} key={x.ind} />
+                    <PassCard name={x.name} org={x.org} img={x.img_url} key={x.ind} sign={x.sign!} />
                 ))}
             </Carousel>
-            <p className="text-[#24FFF2] text-[20px] text-right"><Link to={'#'}>View All</Link></p>
+            {/* <p className="text-[#24FFF2] text-[20px] text-right"><Link to={'#'}>View All</Link></p> */}
         </div>
     )
 }
