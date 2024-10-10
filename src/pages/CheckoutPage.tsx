@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Skeleton } from "@/components/ui/skeleton"
-import { useParams, useNavigate } from "react-router-dom"
+import { useParams } from "react-router-dom"
 import axios from "axios"
 import { useEffect, useState } from "react"
 
@@ -72,7 +72,6 @@ export default function CheckoutPage() {
         email: "",
         phone: ""
     })
-    const navigate = useNavigate()
     const [itemName,setItemName] = useState('0')
     const [itemAmount,setItemAmount] = useState(0)
     const [passInfo,setPassInfo] = useState([])
