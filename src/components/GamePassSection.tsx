@@ -1,7 +1,7 @@
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import PassCard from "./PassCard";
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default function GamePassSection() {
     const responsive = {
@@ -89,7 +89,7 @@ export default function GamePassSection() {
     ]
     return (
         <div className="flex flex-col gap-4 text-center p-6">
-            <p className="font-PostR text-white text-[20px] md:text-[24px] lg:text-[30px]">#Trending Game Passes</p>
+            <p className="font-PostSB text-black dark:text-white text-[20px] md:text-[24px] lg:text-[30px]">#Trending Game Passes</p>
             <Carousel
                 swipeable={false}
                 draggable={false}
@@ -109,7 +109,7 @@ export default function GamePassSection() {
                     <PassCard name={x.name} org={x.org} img={x.img_url} key={x.ind} sign={x.sign!} />
                 ))}
             </Carousel>
-            {/* <p className="text-[#24FFF2] text-[20px] text-right"><Link to={'#'}>View All</Link></p> */}
+            <p className="text-black dark:text-[#24FFF2] text-[20px] text-right"><Link to={'#'}>View All</Link></p>
         </div>
     )
 }

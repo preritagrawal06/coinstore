@@ -12,7 +12,7 @@ interface CardVariable{
 export default function PassCard({name,org,img,sign}:CardVariable){
     const navigate = useNavigate()
     return(
-        <div className="bg-[#091115] rounded-[15px] w-fit">
+        <div className="bg-[#575e62] dark:bg-[#091115] rounded-[15px] w-fit">
             <div className="w-[300px] h-[200px] sm:w-[300px] md:w-[350px] md:h-[250px]">
             <img src={img} alt="game_icon" style={{borderRadius:'15px 15px 0px 0px'}}/>
             </div>

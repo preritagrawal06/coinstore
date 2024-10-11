@@ -69,7 +69,7 @@ export default function AccountSection() {
     }
     return (
         <div className="flex flex-col gap-4 p-6">
-            <p className="font-PostR text-white text-[20px] md:text-[24px] lg:text-[30px]">#Most Popular Game Accounts</p>
+            <p className="font-PostSB text-black dark:text-white text-[20px] md:text-[24px] lg:text-[30px]">#Most Popular Game Accounts</p>
             <Tabs defaultValue="BGMI" >
                 <TabsList className="mb-4">
                     <TabsTrigger value="BGMI">BGMI</TabsTrigger>
@@ -95,7 +95,7 @@ export default function AccountSection() {
                     <ItemCard name={x.name} price={x.price} img={x.img_url} key={x.ind} />
                 ))}
             </Carousel>
-            <p className="text-[#24FFF2] text-[20px] text-right mt-4"><Link to={'#'}>View All</Link></p>
+            <p className="text-black dark:text-[#24FFF2] text-[20px] text-right mt-4"><Link to={'#'}>View All</Link></p>
                 </TabsContent>
                 <TabsContent value="MLBB">
                 <Carousel
@@ -117,7 +117,7 @@ export default function AccountSection() {
                     <ItemCard name={x.name} price={x.price} img={x.img_url} key={x.ind} />
                 ))}
             </Carousel>
-            <p className="text-[#24FFF2] text-[20px] text-right mt-4"><Link to={'#'}>View All</Link></p>
+            <p className="text-black dark:text-[#24FFF2] text-[20px] text-right mt-4"><Link to={'#'}>View All</Link></p>
                 </TabsContent>
             </Tabs>
 

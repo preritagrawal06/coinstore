@@ -68,7 +68,7 @@ export default function AccessoriesSection(){
     ]
     return(
         <div className="flex flex-col gap-4 text-center p-6">
-            <p className="font-PostR text-white text-[20px] md:text-[24px] lg:text-[30px]">#Our Latest Gaming Accessories</p>
+            <p className="font-PostSB text-black dark:text-white text-[20px] md:text-[24px] lg:text-[30px]">#Our Latest Gaming Accessories</p>
             <Carousel
                 swipeable={false}
                 draggable={false}
@@ -88,7 +88,7 @@ export default function AccessoriesSection(){
                     <ItemCard name={x.name} price={x.price} img={x.img_url} key={x.ind} />
                 ))}
             </Carousel>
-            <p className="text-[#24FFF2] text-[20px] text-right"><Link to={'#'}>View All</Link></p>
+            <p className="text-black dark:text-[#24FFF2] text-[20px] text-right"><Link to={'#'}>View All</Link></p>
         </div>
     )
 }

@@ -4,7 +4,7 @@ import Footer from "./Footer";
 
 export default function Layout(){
     return(
-        <div className="bg-[#0F1C23] font-PostR">
+        <div className="bg-[#ffffff]  dark:bg-[#0F1C23] font-PostR">
             <Navbar/>
             <Outlet/>
             <Footer/>

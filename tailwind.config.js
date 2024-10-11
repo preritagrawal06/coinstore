@@ -5,13 +5,15 @@ export default {
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
+  darkMode:'class',
   theme: {
   	extend: {
 		gridTemplateColumns:{
 			'3': 'repeat(auto-fit, minmax(150px, 1fr))'
 		},
   		backgroundImage: {
-  			'hero-pattern': "url('/bgImg.jpg'),linear-gradient(90deg, rgba(9, 7, 10, 0.76) 0.26%, rgba(30, 45, 74, 0.76) 99.8%)"
+  			'hero-pattern': "url('/bgImg.jpg'),linear-gradient(90deg, rgba(240, 240, 240, 0.76) 0.26%, rgba(200, 220, 250, 0.76) 99.8%)",
+			'hero-patternDark':"url('/bgImg.jpg'),linear-gradient(90deg, rgba(9, 7, 10, 0.76) 0.26%, rgba(30, 45, 74, 0.76) 99.8%)"
   		},
   		fontFamily: {
   			PostJb: 'Post No Bills Jaffna Bold',
