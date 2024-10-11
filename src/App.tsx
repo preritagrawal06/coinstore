@@ -6,6 +6,7 @@ import SignIn from './pages/SignIn';
 import PaymentStatus from './pages/PaymentStatus'
 import SignUp from './pages/SignUp';
 import AllTopUpPage from './pages/AllTopUp';
+import PrivacyPolicy from './pages/PrivacyPolicy';
 
 function App() {
 
@@ -18,6 +19,7 @@ function App() {
             <Route path='/checkout/:code' element={<CheckoutPage/>}/>
             <Route path='/status' element={<PaymentStatus/>}/>
             <Route path='/alltopup' element={<AllTopUpPage/>}/>
+            <Route path='/policy' element={<PrivacyPolicy/>}/>
           </Route>
           <Route path='/signin' element={<SignIn/>}/>
           <Route path='/signup' element={<SignUp/>}/>
