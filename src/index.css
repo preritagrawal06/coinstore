@@ -148,7 +148,9 @@ img{
 ::-webkit-scrollbar-thumb {
   background: #888;
 }
-
+html {
+  scroll-behavior: smooth;
+}
 
 @layer base {
   * {

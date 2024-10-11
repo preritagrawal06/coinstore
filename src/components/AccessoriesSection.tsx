@@ -67,8 +67,8 @@ export default function AccessoriesSection(){
     }
     ]
     return(
-        <div className="flex flex-col gap-4 text-center p-6 relative">
-            <p className="font-PostSB text-black dark:text-white text-[20px] md:text-[24px] lg:text-[30px]">#Our Latest Gaming Accessories</p>
+        <div className="flex flex-col gap-4 text-center p-6 relative" id="merchandise">
+            <p className="font-PostSB text-black dark:text-white text-[20px] md:text-[24px] lg:text-[30px]">#Our Merchandise</p>
             <div className="backdrop-blur-sm bg-white/30 absolute z-10 h-[80%] top-[15%] w-[90%] sm:w-[94%] md:w-[95%] lg:w-[98%] text-[32px] font-PostSB m-auto">
               <p className="text-center mt-20 text-[#150707]"> Coming Soon</p>
             </div>

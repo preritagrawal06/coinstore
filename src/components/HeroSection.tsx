@@ -1,5 +1,5 @@
-import { Button } from "@/components/ui/button"
-import { ArrowRight } from "lucide-react"
+// import { Button } from "@/components/ui/button"
+// import { ArrowRight } from "lucide-react"
 
 export default function HeroSection(){
     return(
@@ -19,10 +19,10 @@ export default function HeroSection(){
                 <p className="head1">Play More, Pay Less:</p>
                 <p className="head1">Your Ultimate <span className="text-white dark:text-[#24FFF2]">Game Pass</span> Destination!</p>
             </div>
-            <div className="z-10">
+            {/* <div className="z-10">
                 <Button>Explore More <ArrowRight className="ml-2 h-4 w-4" /> </Button>
                 <Button>Browse Games <ArrowRight className="ml-2 h-4 w-4" /> </Button>
-            </div>
+            </div> */}
             </div>
                 <div className='heroImg'>
                 <img src="/hero2.png" alt="heroIcon2"/>

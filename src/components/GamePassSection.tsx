@@ -88,7 +88,7 @@ export default function GamePassSection() {
     }
     ]
     return (
-        <div className="flex flex-col gap-4 text-center p-6">
+        <div className="flex flex-col gap-4 text-center p-6" id="topup">
             <p className="font-PostSB text-black dark:text-white text-[20px] md:text-[24px] lg:text-[30px]">#Trending Game Passes</p>
             <Carousel
                 swipeable={false}
@@ -109,7 +109,7 @@ export default function GamePassSection() {
                     <PassCard name={x.name} org={x.org} img={x.img_url} key={x.ind} sign={x.sign!} />
                 ))}
             </Carousel>
-            <p className="text-black dark:text-[#24FFF2] text-[20px] text-right"><Link to={'#'}>View All</Link></p>
+            <p className="text-black dark:text-[#24FFF2] text-[20px] text-right"><Link to={'/alltopup'}>View All</Link></p>
         </div>
     )
 }

@@ -5,6 +5,7 @@ import CheckoutPage from './pages/CheckoutPage';
 import SignIn from './pages/SignIn';
 import PaymentStatus from './pages/PaymentStatus'
 import SignUp from './pages/SignUp';
+import AllTopUpPage from './pages/AllTopUp';
 
 function App() {
 
@@ -16,6 +17,7 @@ function App() {
             <Route index element={<LandingPage />} />
             <Route path='/checkout/:code' element={<CheckoutPage/>}/>
             <Route path='/status' element={<PaymentStatus/>}/>
+            <Route path='/alltopup' element={<AllTopUpPage/>}/>
           </Route>
           <Route path='/signin' element={<SignIn/>}/>
           <Route path='/signup' element={<SignUp/>}/>
