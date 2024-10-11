@@ -68,8 +68,11 @@ export default function AccountSection() {
         }
     }
     return (
-        <div className="flex flex-col gap-4 p-6">
+        <div className="flex flex-col gap-4 p-6 relative">
             <p className="font-PostSB text-black dark:text-white text-[20px] md:text-[24px] lg:text-[30px]">#Most Popular Game Accounts</p>
+            <div className="backdrop-blur-sm bg-white/30 absolute z-10 h-[80%] top-[15%] w-[90%] sm:w-[94%] md:w-[95%] lg:w-[98%] text-[32px] font-PostSB m-auto">
+              <p className="text-center mt-20 text-[#150707]"> Coming Soon</p>
+            </div>
             <Tabs defaultValue="BGMI" >
                 <TabsList className="mb-4">
                     <TabsTrigger value="BGMI">BGMI</TabsTrigger>
@@ -90,6 +93,7 @@ export default function AccountSection() {
                 removeArrowOnDeviceType={["tablet", "mobile", "smdevice"]}
                 dotListClass="custom-dot-list-style"
                 itemClass="carousel-item-padding-40-px"
+                className="z-0"
             >
                 {data.map((x) => (
                     <ItemCard name={x.name} price={x.price} img={x.img_url} key={x.ind} />
@@ -112,6 +116,7 @@ export default function AccountSection() {
                 removeArrowOnDeviceType={["tablet", "mobile", "smdevice"]}
                 dotListClass="custom-dot-list-style"
                 itemClass="carousel-item-padding-40-px"
+                className="z-0"
             >
                 {data.map((x) => (
                     <ItemCard name={x.name} price={x.price} img={x.img_url} key={x.ind} />

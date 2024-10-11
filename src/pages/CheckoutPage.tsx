@@ -132,6 +132,18 @@ export default function CheckoutPage() {
             setPassImage("/mlbblarge.png")
             setPassName('Diamonds')
         }
+        else if(name=='pubgm'){
+            setPassImage("/pubgtoken.png")
+            setPassName('UC')
+        }
+        else if(name=='genshin'){
+            setPassImage("/genshintoken.png")
+            setPassName('Crystals')
+        }
+        else if(name=='clashofclans'){
+            setPassImage("/coccoin.png")
+            setPassName('Gold')
+        }
     }
 
     async function getData(){
@@ -165,7 +177,7 @@ export default function CheckoutPage() {
             <div className="flex flex-col lg:flex-row items-start gap-3">
                 <div className="flex flex-col sm:flex-row gap-10 w-[100%] lg:w-[60%]">
                     <div className="h-[200px] w-[250px]">
-                        <img alt="game_pic" src={gameinfo?gameinfo.img_url:'gamepass.jpg'} />
+                        <img alt="game_pic" src={gameinfo?gameinfo.img_url:'gamepass.jpg'}  />
                     </div>
                     <div>
                         <p className="subhead">{gameinfo?gameinfo.name:'Game_Name'}</p>
@@ -173,13 +185,13 @@ export default function CheckoutPage() {
                         <p className="subtext1">Get {gameinfo?gameinfo.name:'Game_Name'} Diamonds or the other passes instantly and at a very affordable price through UniPin now!</p>
                     </div>
                 </div>
-                <div className="bg-[#091115] flex flex-col gap-3 items-center p-4 w-[80%] lg:w-[40%] h-[220px] rounded-xl">
+                <div className="bg-[#e3dbdb] dark:bg-[#091115] flex flex-col gap-3 items-center p-4 w-[80%] lg:w-[40%] h-[220px] rounded-xl">
                     <div className="grid w-full items-center gap-1.5">
                         <Label htmlFor="userID">UserID</Label>
                         <Input type="text" id="userid" className="w-[100%]" placeholder="UserID" onChange={(e)=>{setUserId(e.target.value)}}/>
                     </div>
                     <div className="grid w-full  items-center gap-1.5">
-                        <Label htmlFor="email">ServerID (If any)</Label>
+                        <Label htmlFor="email" >ServerID (If any)</Label>
                         <Input type="email" id="email" placeholder="Server ID ( If any )" onChange={(e)=>{setServerId(e.target.value)}}/>
                     </div>
                     <Button onClick={handleVerification} disabled={isVerified}>{isVerified? "Verified" : "Verify"}</Button>
@@ -194,11 +206,11 @@ export default function CheckoutPage() {
                     <p className="subhead">Selected Items</p>
                     {
                         !loading && 
-                        <div className="grid grid-cols-3 gap-3">
+                        <div className="grid grid-cols-3 gap-3 h-[400px] overflow-y-scroll overflow-x-hidden">
                             {
                                  passInfo?.map((x)=>{
                                     return (
-                                        <div className="flex flex-col gap-2 bg-[#091115] p-2" onClick={()=>setData(x)}>
+                                        <div className="flex flex-col gap-2 bg-[#e3dbdb] dark:bg-[#091115] p-2 rounded-md" onClick={()=>setData(x)}>
                                             <div className="h-[100px] w-[150px]">
                                                 <img alt="game_pic" src={passImage} />
                                              </div>
@@ -224,14 +236,14 @@ export default function CheckoutPage() {
                         )
                     }
                 </div>
-                <div className="bg-[#091115] flex flex-col gap-3 items-center w-[100%] lg:w-[40%] h-fit rounded-xl p-4">
+                <div className="bg-[#e3dbdb] dark:bg-[#091115] flex flex-col gap-3 items-center w-[100%] lg:w-[40%] h-fit rounded-xl p-4">
                     <div className="flex justify-between items-center flex-row w-[100%]">
-                    <p className="font-PostJb text-[20px] text-[#C1C1C1]">Item Selected</p>
-                    <p className="font-PostJb text-[24px] text-white">{itemName} {passName}</p>
+                    <p className="font-PostJb text-[20px] text-[#1b1a1a] dark:text-[#C1C1C1]">Item Selected</p>
+                    <p className="font-PostJb text-[24px] text-black dark:text-white">{itemName} {passName}</p>
                     </div>
                     <div className="flex justify-between items-center flex-row w-[100%]">
-                    <p className="font-PostJb text-[20px] text-[#C1C1C1]">Price</p>
-                    <p className="font-PostJb text-[24px] text-white">₹{itemAmount}</p>
+                    <p className="font-PostJb text-[20px] text-[#1b1a1a] dark:text-[#C1C1C1]">Price</p>
+                    <p className="font-PostJb text-[24px] text-black dark:text-white">₹{itemAmount}</p>
                     </div>
                     <div className="grid w-full  items-center gap-1.5">
                         <Label htmlFor="name">Full Name</Label>

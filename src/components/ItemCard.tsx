@@ -8,7 +8,7 @@ interface CardVariable{
 
 export default function ItemCard({name,price,img}:CardVariable){
     return(
-        <div className="bg-[#575e62] dark:bg-[#091115] rounded-[15px] w-fit">
+        <div className="text-black dark:text-white bg-[#b5b5b5] dark:bg-[#091115 rounded-[15px] w-fit">
             <div className="w-[300px] sm:w-[300px] md:w-[350px] h-auto">
             <img src={img} alt="game_icon" style={{borderRadius:'15px 15px 0px 0px'}}/>
             </div>

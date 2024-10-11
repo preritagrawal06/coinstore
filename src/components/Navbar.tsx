@@ -28,7 +28,7 @@ export default function Navbar(){
     
     return(
         <div className="flex flex-row items-center justify-between bg-none w-[100%] absolute top-1 px-6 ">
-            <div className="h-[70px] w-[100px] bg-cover">
+            <div className="h-[70px] w-[100px] bg-cover bg-[#0F1822] dark:bg-inherit rounded-md">
                 <img alt="Logo" src="/logo.png"/>
             </div>
             <div className="flex items-center gap-4">
