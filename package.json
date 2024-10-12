@@ -26,7 +26,8 @@
     "react-router-dom": "^6.26.1",
     "react-router-hash-link": "^2.4.3",
     "tailwind-merge": "^2.5.2",
-    "tailwindcss-animate": "^1.0.7"
+    "tailwindcss-animate": "^1.0.7",
+    "vaul": "^1.0.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.9.0",

@@ -13,7 +13,7 @@ const PaymentStatus = () => {
                 setLoading(true)
                 const {data} = await axios.get(`https://coinstore-backend.onrender.com/api/payment/payment-status?orderId=${orderId}`)
                 setData(data);
-                console.log(data.data);
+                console.log(data?.data);
                 
             } catch (error) {
                 console.log(error);
