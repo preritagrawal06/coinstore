@@ -164,7 +164,7 @@ export default function CheckoutPage() {
 
     function setData(x:any){
         setItemName(x[0])
-        setItemAmount(parseInt((x[1]*inrVal).toFixed(2)))
+        setItemAmount(parseInt((x[1])))
     }
 
     useEffect(()=>{
