@@ -13,8 +13,8 @@ const PaymentStatus = () => {
                 setLoading(true)
                 const {data} = await axios.get(`https://coinstore-backend.onrender.com/api/payment/payment-status?orderId=${orderId}`)
                 console.log(data);
-                if(data.success){
-                    setStatus(data);
+                setStatus(data);
+                if(data.success && data.data.status === "success"){
                     setSuccess(true)
                     const orderDetails = orderId?.split("_")
                     const userId = orderDetails![0]
@@ -60,11 +60,22 @@ const PaymentStatus = () => {
                 {
                     success? 
                     <div>
-                        <p className="text-[20px] font-PostSB">Your Transaction will be completed soon</p>
-                        <p className="">Don't leave this page</p>
+                        {
+                            status && status.data.status === "success"?
+                            <>
+                                <p className="text-[20px] font-PostSB">Your Transaction will be completed soon</p>
+                                <p className="">Don't leave this page</p>
+                            </>
+                            :
+                            <>
+                                <p className="text-[20px] font-PostSB">Your Transaction is failed.</p>
+                                <p className="">Please contact if any issues</p>
+                            </>
+
+                        }
                     </div>: 
                     <div>
-                         <p className="text-[20px] font-PostSB">Order ID Not found</p>
+                        <p className="text-[20px] font-PostSB">Order ID Not found</p>
                     </div>
                 }
             </div>

@@ -164,7 +164,7 @@ export default function CheckoutPage() {
 
     function setData(x:any){
         setItemName(x[0])
-        setItemAmount(parseInt((x[1])))
+        setItemAmount(parseFloat((x[1])))
     }
 
     useEffect(()=>{
@@ -243,7 +243,7 @@ export default function CheckoutPage() {
                     </div>
                     <div className="flex justify-between items-center flex-row w-[100%]">
                     <p className="font-PostJb text-[20px] text-[#1b1a1a] dark:text-[#C1C1C1]">Price</p>
-                    <p className="font-PostJb text-[24px] text-black dark:text-white">₹{itemAmount}</p>
+                    <p className="font-PostJb text-[24px] text-black dark:text-white">₹{(itemAmount*inrVal).toFixed(2)}</p>
                     </div>
                     <div className="grid w-full  items-center gap-1.5">
                         <Label htmlFor="name">Full Name</Label>
