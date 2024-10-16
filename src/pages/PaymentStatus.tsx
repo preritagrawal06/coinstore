@@ -61,7 +61,7 @@ const PaymentStatus = () => {
                     success? 
                     <div>
                         {
-                            status && status.data.status === "success"?
+                            status && status["data"]["status"] === "success"?
                             <>
                                 <p className="text-[20px] font-PostSB">Your Transaction will be completed soon</p>
                                 <p className="">Don't leave this page</p>
