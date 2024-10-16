@@ -92,6 +92,7 @@ export default function CheckoutPage() {
             const {data} = await axios.post('https://coinstore-backend.onrender.com/api/payment/initiate-payment',{
                 gameId: userId,
                 amount: itemAmount,
+                serverId: serverId,
                 name: userInfo.username,
                 email: userInfo.email,
                 phone: userInfo.phone,
