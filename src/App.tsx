@@ -1,18 +1,18 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import LandingPage from './pages/LandingPage';
-import Layout from './components/Layout';
-import CheckoutPage from './pages/CheckoutPage';
-import SignIn from './pages/SignIn';
-import PaymentStatus from './pages/PaymentStatus'
-import SignUp from './pages/SignUp';
-import AllTopUpPage from './pages/AllTopUp';
-import PrivacyPolicy from './pages/PrivacyPolicy';
+// import { BrowserRouter, Routes, Route } from 'react-router-dom';
+// import LandingPage from './pages/LandingPage';
+// import Layout from './components/Layout';
+// import CheckoutPage from './pages/CheckoutPage';
+// import SignIn from './pages/SignIn';
+// import PaymentStatus from './pages/PaymentStatus'
+// import SignUp from './pages/SignUp';
+// import AllTopUpPage from './pages/AllTopUp';
+// import PrivacyPolicy from './pages/PrivacyPolicy';
 
 function App() {
 
   return (
     <>
-      <BrowserRouter>
+      {/* <BrowserRouter>
         <Routes>
           <Route path="/" element={<Layout/>} >
             <Route index element={<LandingPage />} />
@@ -24,7 +24,10 @@ function App() {
           <Route path='/signin' element={<SignIn/>}/>
           <Route path='/signup' element={<SignUp/>}/>
         </Routes>
-      </BrowserRouter>
+      </BrowserRouter> */}
+      <div className='bg-coming-soon w-full h-screen bg-no-repeat bg-cover flex justify-center items-center' >
+        <p className='text-white font-bold text-3xl'>Coming Soon</p>
+      </div>
     </>
   )
 }
