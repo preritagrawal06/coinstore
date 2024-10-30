@@ -16,11 +16,12 @@ const PaymentStatus = () => {
                 setStatus(data);
                 if(data.success && data.data.status === "success"){
                     setSuccess(true)
-                    const orderDetails = orderId?.split("_")
+                    const orderDetails = orderId?.split("-")
                     const userId = orderDetails![0]
                     const game = orderDetails![1]
                     const denom  = orderDetails![2]
-                    const serverId = orderDetails!.length === 4 ? orderDetails![3] : undefined
+                    // const transactionTime = orderDetails![3]
+                    const serverId = orderDetails!.length === 5 ? orderDetails![4] : undefined
 
                     try {
                         const {data: txnData} = await axios.post('https://coinstore-backend.onrender.com/api/topup/create-topup-order',{
