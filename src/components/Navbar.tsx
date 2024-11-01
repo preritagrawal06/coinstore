@@ -15,7 +15,8 @@ import {
 import { HamburgerMenuIcon } from "@radix-ui/react-icons";
 
 export default function Navbar() {
-    const [darkMode, setDarkMode] = useState(false);
+    const theme = window.localStorage.getItem('data-theme')
+    const [darkMode, setDarkMode] = useState(theme=='light'?false:true)
     const [drawerOpen,setDrawerOpen] = useState(false)
     useScrollBehavior(drawerOpen)
 
