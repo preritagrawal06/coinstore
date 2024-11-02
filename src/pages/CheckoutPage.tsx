@@ -7,18 +7,7 @@ import axios from "axios"
 import { useEffect, useState } from "react"
 
 export default function CheckoutPage() {
-    const smileoneItem = {
-        "mobilelegends BR 78&8 Diamond": "78+8",
-        "mobilelegends BR 156&16 Diamond": "156+16",
-        "mobilelegends BR 234&23 Diamond": "234+23",
-        "mobilelegends BR 625&81 Diamond": "625+81",
-        "mobilelegends BR 1860&335 Diamond": "1860+335",
-        "mobilelegends BR 3099&589 Diamond": "3099+589",
-        "mobilelegends BR 4649&883 Diamond": "4649+883",
-        "mobilelegends BR 7740&1548 Diamond": "7740+1548",
-        "mobilelegends BR Passagem do crepúsculo": "mobilelegends BR Twilight Pass",
-        "Mobile Legends BR - Passe Semanal de Diamante": 'Mobile Legends BR - Diamante Semanal Pass'
-    }
+
     const data = [{
         ind: 1,
         name: 'Mobile Legends',
@@ -84,11 +73,7 @@ export default function CheckoutPage() {
         email: "",
         phone: ""
     })
-    const [itemName, setItemName] = useState('0')
-    const [itemAmount, setItemAmount] = useState(0)
     const [passInfo, setPassInfo] = useState([])
-    const [inrVal, setInrVal] = useState(0)
-    const [inrBrlVal, setInrBrlVal] = useState(0)
     const [loading, setLoading] = useState(true)
     const [passImage, setPassImage] = useState('/coc.jpg')
     const [passName, setPassName] = useState('Gold')
@@ -96,26 +81,24 @@ export default function CheckoutPage() {
     const [serverId, setServerId] = useState('')
     const [isVerified, setIsVerified] = useState(false)
     const [ingameName, setIngameName] = useState('')
-    const [smileoneTokens, setSmileoneTokens] = useState([])
-    const [smileoneTokenId, setSmileoneTokenId] = useState('')
-    const [agent, setAgent] = useState('')
+    const [selectedItem, setSelectedItem] = useState(null)
 
     async function handlePayment() {
         console.log(userInfo);
 
         try {
-            if (!isVerified || userInfo.username.length <= 0 || userInfo.email.length <= 0 || userInfo.phone.length <= 0 || userId.length <= 0 || itemAmount <= 0 || !agent) return
+            if (!isVerified || userInfo.username.length <= 0 || userInfo.email.length <= 0 || userInfo.phone.length <= 0 || userId.length <= 0 || !selectedItem) return
             
             const { data } = await axios.post('https://coinstore-backend.onrender.com/api/payment/initiate-payment', {
                 gameId: userId,
-                amount: itemAmount,
+                amount: selectedItem!['amount'],
                 serverId: serverId,
                 name: userInfo.username,
                 email: userInfo.email,
                 phone: userInfo.phone,
-                itemName: agent === "elitedias" ? itemName : smileoneTokenId,
-                game: info.code,
-                agent: agent
+                itemName: selectedItem!['topupCode'],
+                game: selectedItem!['gameCode'],
+                agent: selectedItem!['provider']
             })
             console.log(data);
             if (data.success) {
@@ -171,40 +154,19 @@ export default function CheckoutPage() {
                 gamecode: info.code,
                 game: gameinfo?.name
             })
-            let val: any = Object.entries(result?.data)
-
-            if (result.data.smileone && result.data.smileone.status === 200) {
-                setSmileoneTokens(result.data.smileone.data.product)
-            }
-            setPassInfo(val)
-
-            await axios.get('https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/usd.min.json').then((res: any) =>
-                setInrVal(res.data.usd.inr))
-            await axios.get('https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/brl.min.json').then((res: any) =>
-                setInrBrlVal(res.data.brl.inr))
+            // let val: any = Object.entries(result?.data)
+            // console.log(result.data);
+            setPassInfo(result.data)
             setLoading(false)
         } catch (err) {
             console.log(err)
         }
     }
 
-    function setData(x: any, agent: string) {
-        if (agent === 'elitedias') {
-            setItemName(x[0])
-            setItemAmount(parseFloat((x[1])))
-            setAgent('elitedias')
-        } else if(agent === 'smileone') {
-            setItemName(smileoneItem[x['spu'] as keyof typeof smileoneItem])
-            setItemAmount(parseFloat((x['price'])))
-            setSmileoneTokenId(x['id'])
-            setAgent('smileone')
-        }
-    }
-
     useEffect(() => {
         getData()
         setGamePassImage()
-        console.log(passInfo);
+        // console.log(passInfo);
 
     }, [])
 
@@ -218,7 +180,7 @@ export default function CheckoutPage() {
                     <div>
                         <p className="subhead">{gameinfo ? gameinfo.name : 'Game_Name'}</p>
                         <p className="subtext1">{gameinfo ? gameinfo.org : 'Company_Name'}</p>
-                        <p className="subtext1">Get {gameinfo ? gameinfo.name : 'Game_Name'} Diamonds or the other passes instantly and at a very affordable price through UPI now!</p>
+                        <p className="subtext1">Get {gameinfo ? gameinfo.name : 'Game_Name'} Diamonds or the other passes instantly and at a very affordable price through Shadow Company now!</p>
                     </div>
                 </div>
                 <div className="bg-[#e3dbdb] dark:bg-[#091115] flex flex-col gap-3 items-center p-4 w-[80%] lg:w-[40%] h-[220px] rounded-xl">
@@ -244,28 +206,14 @@ export default function CheckoutPage() {
                         !loading &&
                         <div className="grid grid-cols-2 md:grid-cols-3 gap-3 h-[400px] overflow-y-scroll overflow-x-hidden">
                             {
-                                smileoneTokens?.map((x, index) => {
-                                    return (
-                                        <div key={index} className="flex flex-col gap-2 bg-[#e3dbdb] dark:bg-[#091115] p-2 rounded-md" onClick={() => setData(x, "smileone")}>
-                                            <div className="h-[40px] w-[50px]">
-                                                <img alt="game_pic" src={passImage} />
-                                            </div>
-                                            <p className="subtext1">{smileoneItem[x["spu"]] ? smileoneItem[x["spu"]] : x['spu']} {passName}</p>
-                                            <p className="subhead">₹{(x["price"] * inrBrlVal).toFixed(2)}</p>
-                                        </div>
-                                    )
-                                })
-                            }
-                            {
                                 passInfo?.map((x, index) => {
                                     return (
-                                        x[0] !== 'smileone' &&
-                                        <div key={index} className="flex flex-col gap-2 bg-[#e3dbdb] dark:bg-[#091115] p-2 rounded-md" onClick={() => setData(x, "elitedias")}>
+                                        <div key={index} className="flex flex-col gap-2 bg-[#e3dbdb] dark:bg-[#091115] p-2 rounded-md" onClick={() => setSelectedItem(x)}>
                                             <div className="h-[40px] w-[50px]">
                                                 <img alt="game_pic" src={passImage} />
                                             </div>
-                                            <p className="subtext1">{x[0]} {passName}</p>
-                                            <p className="subhead">₹{(x[1] * inrVal).toFixed(2)}</p>
+                                            <p className="subtext1">{x['description']} {passName}</p>
+                                            <p className="subhead">₹{x['amount']}</p>
                                         </div>
                                     )
                                 })
@@ -289,11 +237,11 @@ export default function CheckoutPage() {
                 <div className="bg-[#e3dbdb] dark:bg-[#091115] flex flex-col gap-3 items-center w-[100%] lg:w-[40%] h-fit rounded-xl p-4">
                     <div className="flex justify-between items-center flex-row w-[100%]">
                         <p className="font-PostJb text-[20px] text-[#1b1a1a] dark:text-[#C1C1C1]">Item Selected</p>
-                        <p className="font-PostJb text-[24px] text-black dark:text-white">{itemName} {passName}</p>
+                        <p className="font-PostJb text-[24px] text-black dark:text-white">{selectedItem ? selectedItem['description'] : 0} {passName}</p>
                     </div>
                     <div className="flex justify-between items-center flex-row w-[100%]">
                         <p className="font-PostJb text-[20px] text-[#1b1a1a] dark:text-[#C1C1C1]">Price</p>
-                        <p className="font-PostJb text-[24px] text-black dark:text-white">₹{agent === 'elitedias' ? (itemAmount * inrVal).toFixed(2) : (itemAmount * inrBrlVal).toFixed(2)}</p>
+                        <p className="font-PostJb text-[24px] text-black dark:text-white">₹{selectedItem ? selectedItem!['provider'] === 'elitedias' ? selectedItem!['amount'] : selectedItem!['amount'] : 0}</p>
                     </div>
                     <div className="grid w-full  items-center gap-1.5">
                         <Label htmlFor="name">Full Name</Label>
