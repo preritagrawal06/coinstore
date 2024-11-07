@@ -51,7 +51,7 @@ export default function CheckoutPage() {
     },
     {
         ind: 7,
-        name: 'Farlight 84',
+        name: 'Farlight',
         org: 'Lilith Games',
         img_url: '/farlight.jpg',
         sign: 'farlight84'
@@ -98,7 +98,8 @@ export default function CheckoutPage() {
                 phone: userInfo.phone,
                 itemName: selectedItem!['topupCode'],
                 game: selectedItem!['gameCode'],
-                agent: selectedItem!['provider']
+                agent: selectedItem!['provider'],
+                topupCode: selectedItem!['_id']
             })
             console.log(data);
             if (data.success) {
