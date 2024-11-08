@@ -11,7 +11,7 @@ export default function Footer(){
             <div className="flex flex-row gap-16 h-[100%] w-[100%] md:w-[30%]">
                 <div>
                     <p className="font-PostSB text-[16px] sm:text-[20px] md:text-[22px] lg:text-[24px]">Customer Support</p>
-                    <p className="text-[14px] sm:text-[16px] md:text-[20px]">Contact Us</p>
+                    <p className="text-[14px] sm:text-[16px] md:text-[20px]"><a href="/contactus">Contact Us</a></p>
                     <p className="text-[14px] sm:text-[16px] md:text-[20px]">FAQ</p>
                     <p className="text-[14px] sm:text-[16px] md:text-[20px]"><a href="/policy">Privacy Policy</a></p>
                 </div>
