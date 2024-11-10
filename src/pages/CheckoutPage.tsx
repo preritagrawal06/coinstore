@@ -7,7 +7,6 @@ import axios from "axios"
 import { useEffect, useState } from "react"
 
 export default function CheckoutPage() {
-
     const data = [{
         ind: 1,
         name: 'Mobile Legends',
@@ -84,10 +83,11 @@ export default function CheckoutPage() {
     const [selectedItem, setSelectedItem] = useState(null)
 
     async function handlePayment() {
-        console.log(userInfo);
+        // console.log(userInfo);
 
         try {
             if (!isVerified || userInfo.username.length <= 0 || userInfo.email.length <= 0 || userInfo.phone.length <= 0 || userId.length <= 0 || !selectedItem) return
+            console.log(selectedItem);
             
             const { data } = await axios.post('https://coinstore-backend.onrender.com/api/payment/initiate-payment', {
                 gameId: userId,
@@ -99,7 +99,7 @@ export default function CheckoutPage() {
                 itemName: selectedItem!['topupCode'],
                 game: selectedItem!['gameCode'],
                 agent: selectedItem!['provider'],
-                topupCode: selectedItem!['_id']
+                topupId: selectedItem!['_id']
             })
             console.log(data);
             if (data.success) {
