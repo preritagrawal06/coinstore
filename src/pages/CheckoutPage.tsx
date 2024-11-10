@@ -99,7 +99,7 @@ export default function CheckoutPage() {
                 itemName: selectedItem!['topupCode'],
                 game: selectedItem!['gameCode'],
                 agent: selectedItem!['provider'],
-                topupCode: selectedItem!['_id']
+                topupId: selectedItem!['_id']
             })
             console.log(data);
             if (data.success) {
