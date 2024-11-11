@@ -24,8 +24,7 @@ export default function SignIn(){
         </h1>
 
         <p className="mt-4 leading-relaxed text-gray-500">
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eligendi nam dolorum aliquam,
-          quibusdam aperiam voluptatum.
+        Unlock endless adventures, explore realms unknown, and conquer challenges with every login.
         </p>
 
         <form action="#" className="mt-8 grid grid-cols-6 gap-6">
@@ -50,6 +49,10 @@ export default function SignIn(){
             >
               Login
             </Button>
+            <p className="mt-4 text-sm text-gray-500 sm:mt-0">
+              New User?
+              <a href="/signup" className="text-gray-700 underline">Sign Up</a>.
+            </p>
           </div>
         </form>
       </div>

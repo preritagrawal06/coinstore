@@ -45,6 +45,7 @@ export default function Navbar() {
                 <a href={'/#topup'} className="font-PostSB text-[16px] md:text-[20px] text-[#54a5a0] dark:text-[#abf5f0] ">Topup</a>
                 <a href={'/#account'} className="font-PostSB text-[16px] md:text-[20px] text-[#54a5a0] dark:text-[#abf5f0] ">Account</a>
                 <a href={'/#merchandise'} className="font-PostSB text-[16px] md:text-[20px] text-[#54a5a0] dark:text-[#abf5f0] ">Merchandise</a>
+                <Button className="m-0 font-bold" variant={'primary'}><a href="/login">Login</a></Button>
                 <Switch className="data-[state=checked]:bg-[#ffbf00] data-[state=unchecked]:bg-[#123456]"
                     checkedIcon={<Moon />}
                     uncheckedIcon={<Sun />}

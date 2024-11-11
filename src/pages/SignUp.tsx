@@ -24,22 +24,13 @@ export default function SignUp(){
         </h1>
 
         <p className="mt-4 leading-relaxed text-gray-500">
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eligendi nam dolorum aliquam,
-          quibusdam aperiam voluptatum.
+        Embark on your ultimate gaming journey! Sign up now to unlock exclusive content, connect with players worldwide, and dive into endless adventures.
         </p>
 
         <form action="#" className="mt-8 grid grid-cols-6 gap-6">
-          <div className="col-span-6 sm:col-span-3">
+          <div className="col-span-6">
             <label htmlFor="FirstName" className="block text-sm font-medium text-gray-700">
-              First Name
-            </label>
-
-            <Input type="text" id="userid" className="w-[100%] text-black" />
-          </div>
-
-          <div className="col-span-6 sm:col-span-3">
-            <label htmlFor="LastName" className="block text-sm font-medium text-gray-700">
-              Last Name
+              Name
             </label>
 
             <Input type="text" id="userid" className="w-[100%] text-black" />
@@ -51,26 +42,18 @@ export default function SignUp(){
             <Input type="text" id="userid" className="w-[100%] text-black" />
           </div>
 
-          <div className="col-span-6 sm:col-span-3">
+          <div className="col-span-6">
             <label htmlFor="Password" className="block text-sm font-medium text-gray-700"> Password </label>
 
             <Input type="text" id="userid" className="w-[100%] text-black" />
           </div>
 
-          <div className="col-span-6 sm:col-span-3">
+          <div className="col-span-6 ">
             <label htmlFor="PasswordConfirmation" className="block text-sm font-medium text-gray-700">
-              Password Confirmation
+              Confirm Password
             </label>
 
             <Input type="text" id="userid" className="w-[100%] text-black" />
-          </div>
-          <div className="col-span-6">
-            <p className="text-sm text-gray-500">
-              By creating an account, you agree to our
-              <a href="#" className="text-gray-700 underline"> terms and conditions </a>
-              and
-              <a href="#" className="text-gray-700 underline">privacy policy</a>.
-            </p>
           </div>
 
           <div className="col-span-6 sm:flex sm:items-center sm:gap-4">
@@ -82,7 +65,7 @@ export default function SignUp(){
 
             <p className="mt-4 text-sm text-gray-500 sm:mt-0">
               Already have an account?
-              <a href="#" className="text-gray-700 underline">Log in</a>.
+              <a href="/login" className="text-gray-700 underline">Log in</a>.
             </p>
           </div>
         </form>
