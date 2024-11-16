@@ -101,7 +101,7 @@ export default function CheckoutPage() {
                 agent: selectedItem!['provider'],
                 topupId: selectedItem!['_id']
             })
-            console.log(data);
+            // console.log(data);
             if (data.success) {
                 window.location.href = data.data.paymentUrl
             }
