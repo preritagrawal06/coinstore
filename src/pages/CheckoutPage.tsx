@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Skeleton } from "@/components/ui/skeleton"
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import axios from "axios"
 import { useEffect, useState } from "react"
 
@@ -66,12 +66,13 @@ export default function CheckoutPage() {
 
     const info = useParams()
     const gameinfo = data.find((x) => x.sign == info.code)
-
-    const [userInfo, setUserInfo] = useState({
-        username: "",
-        email: "",
-        phone: ""
-    })
+    const token = localStorage.getItem('token')
+    const userInfo = JSON.parse(localStorage.getItem('user')!)
+    // const [userInfo, setUserInfo] = useState({
+    //     username: "",
+    //     email: "",
+    //     phone: ""
+    // })
     const [passInfo, setPassInfo] = useState([])
     const [loading, setLoading] = useState(true)
     const [passImage, setPassImage] = useState('/coc.jpg')
@@ -81,10 +82,41 @@ export default function CheckoutPage() {
     const [isVerified, setIsVerified] = useState(false)
     const [ingameName, setIngameName] = useState('')
     const [selectedItem, setSelectedItem] = useState(null)
+    const navigate = useNavigate()
 
-    async function handlePayment() {
+    async function handleWalletPayment() {
         // console.log(userInfo);
 
+        try {
+            if (!isVerified || userInfo.username.length <= 0 || userInfo.email.length <= 0 || userInfo.phone.length <= 0 || userId.length <= 0 || !selectedItem) return
+            console.log(selectedItem);
+            
+            const { data } = await axios.post('https://coinstore-backend.onrender.com/api/buyer/topup', {
+                userid: userId,
+                amount: selectedItem!['amount'],
+                serverid: serverId,
+                name: userInfo.username,
+                email: userInfo.email,
+                phone: userInfo.phone,
+                denom: selectedItem!['topupCode'],
+                game: selectedItem!['gameCode'],
+                provider: selectedItem!['provider'],
+                topupId: selectedItem!['_id']
+            })
+            console.log(data);
+            // if (data.success) {
+            //     window.location.href = data.data.paymentUrl
+            // }
+        } catch (error) {
+            console.log(error);
+        }
+    }
+    
+    async function handleUPIPayment() {
+        // console.log(userInfo);
+        if(!userInfo || !token){
+            navigate('/login')
+        }
         try {
             if (!isVerified || userInfo.username.length <= 0 || userInfo.email.length <= 0 || userInfo.phone.length <= 0 || userId.length <= 0 || !selectedItem) return
             console.log(selectedItem);
@@ -244,7 +276,7 @@ export default function CheckoutPage() {
                         <p className="font-PostJb text-[20px] text-[#1b1a1a] dark:text-[#C1C1C1]">Price</p>
                         <p className="font-PostJb text-[24px] text-black dark:text-white">₹{selectedItem ? selectedItem!['provider'] === 'elitedias' ? selectedItem!['amount'] : selectedItem!['amount'] : 0}</p>
                     </div>
-                    <div className="grid w-full  items-center gap-1.5">
+                    {/* <div className="grid w-full  items-center gap-1.5">
                         <Label htmlFor="name">Full Name</Label>
                         <Input type="text" id="full-name" placeholder="Your full name" onChange={(e) => { setUserInfo({ ...userInfo, username: e.target.value }) }} />
                     </div>
@@ -256,8 +288,15 @@ export default function CheckoutPage() {
                         <Label htmlFor="email">Phone</Label>
                         <Input type="text" id="phone" placeholder="Your contact number" onChange={(e) => { setUserInfo({ ...userInfo, phone: e.target.value }) }} />
                     </div>
-                    <p className="text-gray-500">NOTE: None of these informations are stored. The data is used for payment only</p>
-                    <Button className="w-[100%]" onClick={handlePayment} disabled={!isVerified}>{!isVerified ? "Verify your in-game ID first" : "Purchase Now"}</Button>
+                    <p className="text-gray-500">NOTE: None of these informations are stored. The data is used for payment only</p> */}
+                    {
+                        token && 
+                        <>
+                            <Button className="w-[100%]" onClick={handleWalletPayment} disabled={!isVerified}>{!isVerified ? "Verify your in-game ID first" : "Pay using wallet"}</Button>
+                            <p>OR</p>
+                        </>
+                    }
+                    <Button className="w-[100%]" onClick={handleUPIPayment} disabled={!isVerified}>{!isVerified ? "Verify your in-game ID first" : "Pay using UPI"}</Button>
                 </div>
             </div>
         </div>
