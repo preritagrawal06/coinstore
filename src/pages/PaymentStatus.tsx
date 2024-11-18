@@ -16,27 +16,45 @@ const PaymentStatus = () => {
                 setStatus(data);
                 if (data.success && data.data.status === "success") {
                     setSuccess(true)
-                    const orderDetails = orderId?.split("-")
-                    const userId = orderDetails![0]
-                    const game = orderDetails![1]
-                    const denom = orderDetails![2]
-                    // const transactionTime = orderDetails![3]
-                    const serverId = orderDetails!.length === 5 ? orderDetails![4] : undefined
-
-                    try {
-                        const {data: txnData} = await axios.post('https://coinstore-backend.onrender.com/api/topup/create-topup-order',{
-                            userid: userId,
-                            game,
-                            serverid: serverId,
-                            denom: denom,
-                            paymentData: data.data
-                        })
-                        console.log(txnData);
-
-                    } catch (error) {
-                        console.log(error);
+                    if(data.data.paymentNote === 'wallet'){
+                        try {
+                            const {data: txnData} = await axios.post('https://coinstore-backend.onrender.com/api/buyer/wallet/add',{
+                                paymentData: data.data
+                            },{
+                                headers:{
+                                    authorization: `Bearer ${localStorage.getItem('token')}`
+                                }
+                            })
+                            console.log(txnData);
+    
+                        } catch (error) {
+                            console.log(error);
+                        }
                     }
-                }
+                    else{
+                        const orderDetails = orderId?.split("-")
+                        const userId = orderDetails![0]
+                        const game = orderDetails![1]
+                        const denom = orderDetails![2]
+                        // const transactionTime = orderDetails![3]
+                        const serverId = orderDetails!.length === 5 ? orderDetails![4] : undefined
+    
+                        try {
+                            const {data: txnData} = await axios.post('https://coinstore-backend.onrender.com/api/topup/create-topup-order',{
+                                userid: userId,
+                                game,
+                                serverid: serverId,
+                                denom: denom,
+                                paymentData: data.data
+                            })
+                            console.log(txnData);
+    
+                        } catch (error) {
+                            console.log(error);
+                        }
+                    }
+
+                    }
             } catch (error) {
                 console.log(error);
                 setSuccess(false)

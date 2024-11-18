@@ -23,7 +23,7 @@ function App() {
             <Route path='/policy' element={<PrivacyPolicy/>}/>
             <Route path='/contactus' element={<ContactUs/>}/>
           </Route>
-          <Route path='/signin' element={<SignIn/>}/>
+          <Route path='/login' element={<SignIn/>}/>
           <Route path='/signup' element={<SignUp/>}/>
         </Routes>
       </BrowserRouter>
