@@ -26,7 +26,9 @@ const PaymentStatus = () => {
                                 }
                             })
                             console.log(txnData);
-    
+                            if(txnData.success && txnData.user){
+                                localStorage.setItem('user', JSON.stringify(txnData.user))
+                            }
                         } catch (error) {
                             console.log(error);
                         }

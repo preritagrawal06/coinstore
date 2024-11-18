@@ -5,6 +5,7 @@ import { Skeleton } from "@/components/ui/skeleton"
 import { useNavigate, useParams } from "react-router-dom"
 import axios from "axios"
 import { useEffect, useState } from "react"
+import {  useToast } from "@/hooks/use-toast"
 
 export default function CheckoutPage() {
     const data = [{
@@ -83,6 +84,7 @@ export default function CheckoutPage() {
     const [ingameName, setIngameName] = useState('')
     const [selectedItem, setSelectedItem] = useState(null)
     const navigate = useNavigate()
+    const {toast} = useToast()
 
     async function handleWalletPayment() {
         // console.log(userInfo);
@@ -91,7 +93,7 @@ export default function CheckoutPage() {
             if (!isVerified || userInfo.username.length <= 0 || userInfo.email.length <= 0 || userInfo.phone.length <= 0 || userId.length <= 0 || !selectedItem) return
             console.log(selectedItem);
             
-            const { data } = await axios.post('https://coinstore-backend.onrender.com/api/buyer/topup', {
+            const { data } = await axios.post('https://coinstore-backend.onrender.com/api/buyer/wallet/topup', {
                 userid: userId,
                 amount: selectedItem!['amount'],
                 serverid: serverId,
@@ -102,13 +104,26 @@ export default function CheckoutPage() {
                 game: selectedItem!['gameCode'],
                 provider: selectedItem!['provider'],
                 topupId: selectedItem!['_id']
+            },{
+                headers:{
+                    authorization: `Bearer ${localStorage.getItem('token')}`
+                }
             })
             console.log(data);
             // if (data.success) {
             //     window.location.href = data.data.paymentUrl
             // }
+            if(data.success && data.user){
+                localStorage.setItem('user', JSON.stringify(data.user))
+            }
+            toast({
+                description: data.message
+            })
         } catch (error) {
             console.log(error);
+            toast({
+                description: (error as Error).message
+            })
         }
     }
     
