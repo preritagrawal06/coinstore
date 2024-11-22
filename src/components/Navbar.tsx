@@ -13,9 +13,18 @@ import {
   DrawerTitle,
   useScrollBehavior,
 } from "@/components/ui/drawer";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table"
 import { HamburgerMenuIcon } from "@radix-ui/react-icons";
 import { Dialog, DialogContent, DialogDescription, DialogTrigger } from "./ui/dialog";
 import axios from "axios";
+import { useToast } from "@/hooks/use-toast";
 
 export default function Navbar() {
   const theme = window.localStorage.getItem("data-theme");
@@ -24,13 +33,39 @@ export default function Navbar() {
   const [darkMode, setDarkMode] = useState(theme == "light" ? false : true);
   const [amount, setAmount] = useState('')
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const [data, setData] = useState([])
   useScrollBehavior(drawerOpen);
+
+  const { toast } = useToast()
+
+  async function getData() {
+    try {
+      const token = localStorage.getItem("token");
+
+      const res = await axios.get('https://coinstore-backend.onrender.com/api/buyer/transactions/all', {
+        headers: {
+          authorization: `Bearer ${token}`
+        }
+      })
+      console.log(res)
+      setData(res.data.transaction)
+    } catch (err: any) {
+      toast({
+        description: err.message
+      })
+      console.log(err)
+    }
+  }
+
+  useEffect(() => {
+    getData()
+  }, [])
 
   function toggleDarkMode() {
     setDarkMode(!darkMode);
   }
 
-  function logout(){
+  function logout() {
     window.localStorage.removeItem('user')
     window.localStorage.removeItem('token')
   }
@@ -45,10 +80,10 @@ export default function Navbar() {
     }
   }, [darkMode]);
 
-  const handleAddMoney = async()=>{
-    if(amount.length <= 0) return
+  const handleAddMoney = async () => {
+    if (amount.length <= 0) return
     try {
-      const {data} = await axios.post('https://coinstore-backend.onrender.com/api/payment/add-wallet',{
+      const { data } = await axios.post('https://coinstore-backend.onrender.com/api/payment/add-wallet', {
         amount
       }, {
         headers: {
@@ -56,12 +91,12 @@ export default function Navbar() {
         }
       })
 
-      if(data.success){
+      if (data.success) {
         window.location.href = data.data.paymentUrl
       }
     } catch (error) {
       console.log(error);
-      
+
     }
   }
 
@@ -92,27 +127,61 @@ export default function Navbar() {
           Merchandise
         </a>
         {token ? (
-         <div className="flex flex-row gap-2">
-           <Dialog>
-            <DialogTrigger><Button className="m-0">{(user!.wallet as Number).toFixed(2)}</Button></DialogTrigger>
-            <DialogContent>
+          <div className="flex flex-row gap-2 h-full">
+            <Dialog>
+              <DialogTrigger><Button className="m-0">{(user!.wallet as Number).toFixed(2)}</Button></DialogTrigger>
+              <DialogContent>
                 <DialogDescription>
-                <div className="grid gap-4 py-4">
-          <div className="grid gap-4">
-            <Label htmlFor="amount">
-              Amount
-            </Label>
-            <Input id="amount" className="col-span-3" onChange={(e)=>{setAmount(e.target.value)}}/>
-          </div>
-          <Button onClick={handleAddMoney}>Proceed</Button>
-          </div>
+                  <div className="grid gap-4 py-4">
+                    <div className="grid gap-4">
+                      <Label htmlFor="amount">
+                        Amount
+                      </Label>
+                      <Input id="amount" className="col-span-3" onChange={(e) => { setAmount(e.target.value) }} />
+                    </div>
+                    <Button onClick={handleAddMoney}>Proceed</Button>
+                    <Table className="w-full h-full overflow-x-scroll border border-gray-200 rounded-lg shadow ">
+                      <TableHeader>
+                        <TableRow>
+                          <TableHead className="w-12" />
+                          <TableHead className="w-[100px]">Name</TableHead>
+                          <TableHead>Email</TableHead>
+                          <TableHead>Phone Number</TableHead>
+                          <TableHead>Game Name</TableHead>
+                          <TableHead>Item Name</TableHead>
+                          <TableHead>Transaction Date</TableHead>
+                          <TableHead>Order ID</TableHead>
+                          <TableHead>User ID</TableHead>
+                          <TableHead>Payment Status</TableHead>
+                          <TableHead className="text-right">Amount</TableHead>
+                        </TableRow>
+                      </TableHeader>
+                      <TableBody>
+                        {data?.map((invoice: any, index: any) => (
+                          <TableRow key={index}>
+                            <TableCell>{index + 1}</TableCell>
+                            <TableCell className="font-medium">{invoice['customerName']}</TableCell>
+                            <TableCell>{invoice['customerEmail']}</TableCell>
+                            <TableCell>{invoice['customerPhone']}</TableCell>
+                            <TableCell>{invoice['game']}</TableCell>
+                            <TableCell>{invoice['itemName']}</TableCell>
+                            <TableCell>{new Date(invoice['transactionDate']).toLocaleDateString()}</TableCell>
+                            <TableCell>{invoice['orderid']}</TableCell>
+                            <TableCell>{invoice['userid']}</TableCell>
+                            <TableCell>{invoice['paymentStatus']}</TableCell>
+                            <TableCell className="text-right">{invoice['amount']}</TableCell>
+                          </TableRow>
+                        ))}
+                      </TableBody>
+                    </Table>
+                  </div>
                 </DialogDescription>
-            </DialogContent>
-          </Dialog>
-          <Button className="m-0 font-bold" variant={"primary"} onClick={logout}>
-            <a href="/">Logout</a>
-          </Button>
-         </div>
+              </DialogContent>
+            </Dialog>
+            <Button className="m-0 font-bold" variant={"primary"} onClick={logout}>
+              <a href="/">Logout</a>
+            </Button>
+          </div>
         ) : (
           <Button className="m-0 font-bold" variant={"primary"}>
             <a href="/login">Login</a>
@@ -152,26 +221,27 @@ export default function Navbar() {
               <DrawerDescription className="flex flex-col gap-4">
                 {token ? (
                   <div className="flex flex-col gap-2 items-center">
-                  <Dialog>
-                   <DialogTrigger><Button className="m-0 w-20">{(user!.wallet as Number).toFixed(2)}</Button></DialogTrigger>
-                   <DialogContent>
-                       <DialogDescription>
-                       <div className="grid gap-4 py-4">
-                 <div className="grid gap-4">
-                   <Label htmlFor="amount">
-                     Amount
-                   </Label>
-                   <Input id="amount" className="col-span-3" onChange={(e)=>{setAmount(e.target.value)}}/>
-                 </div>
-                 <Button onClick={handleAddMoney}>Proceed</Button>
-                 </div>
-                       </DialogDescription>
-                   </DialogContent>
-                 </Dialog>
-                 <Button className="m-0 font-bold w-20" onClick={logout}>
-                   <a href="/">Logout</a>
-                 </Button>
-                </div>
+                    <Dialog>
+                      <DialogTrigger><Button className="m-0 w-20">{(user!.wallet as Number).toFixed(2)}</Button></DialogTrigger>
+                      <DialogContent>
+                        <DialogDescription>
+                          <div className="grid gap-4 py-4">
+                            <div className="grid gap-4">
+                              <Label htmlFor="amount">
+                                Amount
+                              </Label>
+                              <Input id="amount" className="col-span-3" onChange={(e) => { setAmount(e.target.value) }} />
+                            </div>
+                            <Button onClick={handleAddMoney}>Proceed</Button>
+                          </div>
+
+                        </DialogDescription>
+                      </DialogContent>
+                    </Dialog>
+                    <Button className="m-0 font-bold w-20" onClick={logout}>
+                      <a href="/">Logout</a>
+                    </Button>
+                  </div>
                 ) : (
                   <Button className="m-0 font-bold">
                     <a href="/login">Login</a>
