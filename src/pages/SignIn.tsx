@@ -12,7 +12,8 @@ export default function SignIn(){
     const [password,setPassword] = useState('')
     const navigate = useNavigate()
     const {toast} = useToast()
-
+    const queryString = new URLSearchParams(window.location.search)
+    const redirectURL = queryString.get('redirect')
     async function validateUser(e:any) {
       e.preventDefault()
         if( !email || !password ){
@@ -34,7 +35,7 @@ export default function SignIn(){
             toast({
               description: "Logged In successfully",
             })
-            navigate('/')
+            redirectURL ? navigate(`/checkout/${redirectURL}`) : navigate('/')
           } else{
             toast({
               description: "Internal Server Error",
