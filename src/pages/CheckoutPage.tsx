@@ -130,7 +130,7 @@ export default function CheckoutPage() {
     async function handleUPIPayment() {
         // console.log(userInfo);
         if(!userInfo || !token){
-            navigate('/login')
+            navigate(`/login?redirect=${info.code}`)
         }
         try {
             if (!isVerified || userInfo.username.length <= 0 || userInfo.email.length <= 0 || userInfo.phone.length <= 0 || userId.length <= 0 || !selectedItem) return
