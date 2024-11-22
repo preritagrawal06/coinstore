@@ -93,7 +93,7 @@ export default function CheckoutPage() {
             if (!isVerified || userInfo.username.length <= 0 || userInfo.email.length <= 0 || userInfo.phone.length <= 0 || userId.length <= 0 || !selectedItem) return
             console.log(selectedItem);
             
-            const { data } = await axios.post('http://localhost:8000/api/buyer/wallet/topup', {
+            const { data } = await axios.post('https://coinstore-backend.onrender.com/api/buyer/wallet/topup', {
                 userid: userId,
                 amount: selectedItem!['amount'],
                 serverid: serverId,
