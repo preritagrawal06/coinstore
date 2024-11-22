@@ -102,10 +102,16 @@ export default function Navbar() {
 
   return (
     <div className="flex flex-row items-center justify-between bg-none w-[100%] absolute top-1 px-6 z-10 ">
-      <div className="h-[70px] w-[100px] bg-cover bg-[#0F1822] dark:bg-inherit rounded-md">
+      <div className="h-[70px] bg-cover bg-[#0F1822] dark:bg-inherit rounded-md flex">
         <a href="/">
-          <img alt="Logo" src="/logo.png" />
+          <img alt="Logo" src="/logo.png"/>
         </a>
+        {
+          user &&
+          <div>
+            <p className="font-PostSB text-[16px] md:text-[20px] text-[#54a5a0] dark:text-[#abf5f0] ">Hello, {user.username}</p>
+          </div>
+        }
       </div>
       <div className="items-center gap-4 hidden sm:flex ">
         <a
@@ -129,7 +135,7 @@ export default function Navbar() {
         {token ? (
           <div className="flex flex-row gap-2 h-full">
             <Dialog>
-              <DialogTrigger><Button className="m-0">{(user!.wallet as Number).toFixed(2)}</Button></DialogTrigger>
+              <DialogTrigger><Button className="m-0">{(user!.wallet as Number).toFixed(2)} SC</Button></DialogTrigger>
               <DialogContent>
                 <DialogDescription>
                   <div className="grid gap-4 py-4">

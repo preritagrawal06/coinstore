@@ -93,7 +93,7 @@ export default function CheckoutPage() {
             if (!isVerified || userInfo.username.length <= 0 || userInfo.email.length <= 0 || userInfo.phone.length <= 0 || userId.length <= 0 || !selectedItem) return
             console.log(selectedItem);
             
-            const { data } = await axios.post('https://coinstore-backend.onrender.com/api/buyer/wallet/topup', {
+            const { data } = await axios.post('http://localhost:8000/api/buyer/wallet/topup', {
                 userid: userId,
                 amount: selectedItem!['amount'],
                 serverid: serverId,
@@ -231,7 +231,7 @@ export default function CheckoutPage() {
                         <p className="subtext1">Get {gameinfo ? gameinfo.name : 'Game_Name'} Diamonds or the other passes instantly and at a very affordable price through Shadow Company now!</p>
                     </div>
                 </div>
-                <div className="bg-[#e3dbdb] dark:bg-[#091115] flex flex-col gap-3 items-center p-4 w-[80%] lg:w-[40%] h-[220px] rounded-xl">
+                <div className="bg-[#e3dbdb] dark:bg-[#091115] flex flex-col gap-3 items-center p-4 w-[80%] lg:w-[40%] rounded-xl">
                     <div className="grid w-full items-center gap-1.5">
                         <Label htmlFor="userID">UserID</Label>
                         <Input type="text" id="userid" className="w-[100%]" placeholder="UserID" onChange={(e) => { setUserId(e.target.value) }} />
@@ -256,7 +256,7 @@ export default function CheckoutPage() {
                             {
                                 passInfo?.map((x, index) => {
                                     return (
-                                        <div key={index} className="flex flex-col gap-2 bg-[#e3dbdb] dark:bg-[#091115] p-2 rounded-md" onClick={() => setSelectedItem(x)}>
+                                        <div key={index} className={`flex flex-col gap-2 bg-[#e3dbdb] dark:bg-[#091115] p-2 rounded-md cursor-pointer ${selectedItem === x ? "border border-black dark:border-white" : ""}`} onClick={() => setSelectedItem(x)}>
                                             <div className="h-[40px] w-[50px]">
                                                 <img alt="game_pic" src={passImage} />
                                             </div>

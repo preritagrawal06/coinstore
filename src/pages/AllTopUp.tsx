@@ -7,7 +7,7 @@ export default function AllTopUpPage(){
         name: 'Mobile Legends',
         org: 'Moonton',
         img_url: 'mlbb.png',
-        sign:'mlbb'
+        sign:'mlbb_global'
     },
     {
         ind: 2,
