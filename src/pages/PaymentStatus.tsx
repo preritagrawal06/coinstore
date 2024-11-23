@@ -1,5 +1,7 @@
+import { Button } from "@/components/ui/button";
 import axios from "axios";
 import { useState, useEffect } from "react";
+
 
 const PaymentStatus = () => {
     const [loading, setLoading] = useState(false)
@@ -7,13 +9,16 @@ const PaymentStatus = () => {
     const orderId = queryString.get('orderId')
     const [status, setStatus] = useState()
     const [success, setSuccess] = useState(false)
+    const [message, setMessage] = useState('Your Transaction will be completed soon')
     useEffect(() => {
         async function getStatus() {
             try {
                 setLoading(true)
                 const { data } = await axios.get(`https://coinstore-backend.onrender.com/api/payment/payment-status?orderId=${orderId}`)
                 console.log(data);
-                setStatus(data);
+                if(data.success){
+                    setStatus(data)
+                }
                 if (data.success && data.data.status === "success") {
                     setSuccess(true)
                     if(data.data.paymentNote === 'wallet'){
@@ -26,6 +31,7 @@ const PaymentStatus = () => {
                                 }
                             })
                             console.log(txnData);
+                            setMessage(txnData.message)
                             if(txnData.success && txnData.user){
                                 localStorage.setItem('user', JSON.stringify(txnData.user))
                             }
@@ -108,6 +114,10 @@ const PaymentStatus = () => {
                                         <p>Issued</p>
                                         <p>{formatDate(status['data']['createdAt'])}</p>
                                     </div>
+                                    <div className="flex w-full justify-between">
+                                        <p>Complaint?</p>
+                                        <Button size="xs"><a href={`https://api.whatsapp.com/send?phone=917217320257&text=I want to know about transaction with id ${(status['data']['orderId'] as string).split("-")[0]}`} className="text-sm">Raise</a></Button>
+                                    </div>
                                 </div>
                                 :
                                 <p>OrderID not found</p>
@@ -118,7 +128,7 @@ const PaymentStatus = () => {
                                 {
                                     status && status["data"]["status"] === "success" ?
                                         <>
-                                            <p className="text-[20px] font-PostSB">Your Transaction will be completed soon</p>
+                                            <p className="text-[20px] font-PostSB">{message}</p>
                                             <p className="">Don't leave this page</p>
                                         </>
                                         :
