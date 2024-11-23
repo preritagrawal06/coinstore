@@ -25,6 +25,8 @@ import { HamburgerMenuIcon } from "@radix-ui/react-icons";
 import { Dialog, DialogContent, DialogDescription, DialogTrigger } from "./ui/dialog";
 import axios from "axios";
 import { useToast } from "@/hooks/use-toast";
+import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
+import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 
 export default function Navbar() {
   const theme = window.localStorage.getItem("data-theme");
@@ -101,13 +103,28 @@ export default function Navbar() {
 
   return (
     <div className="flex flex-row items-center justify-between bg-none w-[100%] absolute top-1 px-6 z-10 ">
-      <div className="h-[70px] bg-cover bg-[#0F1822] dark:bg-inherit rounded-md flex">
+      <div className="h-[70px] bg-cover bg-[#0F1822] dark:bg-inherit rounded-md flex items-center gap-2">
         <a href="/">
-          <img alt="Logo" src="/logo.png"/>
+          <img alt="Logo" src="/logo.png" style={{width:'80px'}}/>
         </a>
         {
           user &&
-          <div>
+          <div className="hidden items-center gap-2 sm:flex">
+            <Popover>
+              <PopoverTrigger>
+              <Avatar>
+                <AvatarImage src="https://avatar.iran.liara.run/public"/>
+              <AvatarFallback>{user.username[0]}</AvatarFallback>
+            </Avatar>
+              </PopoverTrigger>
+              <PopoverContent className="w-80">
+              <div className="grid gap-4">
+                    <p>Username: {user.username}</p>
+                    <p>Phone-Number:{user.phone}</p>
+                    <p>Email: {user.email}</p>
+                  </div>
+              </PopoverContent>
+            </Popover>
             <p className="font-PostSB text-[16px] md:text-[20px] text-[#54a5a0] dark:text-[#abf5f0] ">Hello, {user.username}</p>
           </div>
         }
@@ -286,6 +303,27 @@ export default function Navbar() {
                     <a href="/login">Login</a>
                   </Button>
                 )}
+                {
+          user &&
+          <div className="flex items-center gap-2 flex-col">
+            <Popover>
+              <PopoverTrigger>
+              <Avatar>
+              <AvatarImage src="https://avatar.iran.liara.run/public"/>
+              <AvatarFallback>{user.username[0]}</AvatarFallback>
+            </Avatar>
+              </PopoverTrigger>
+              <PopoverContent className="w-80">
+              <div className="grid gap-4">
+                    <p>Username: {user.username}</p>
+                    <p>Phone-Number:{user.phone}</p>
+                    <p>Email: {user.email}</p>
+                  </div>
+              </PopoverContent>
+            </Popover>
+            <p className="font-PostSB text-[16px] md:text-[20px] text-[#54a5a0] dark:text-[#abf5f0] ">Hello, {user.username}</p>
+          </div>
+        }
                 <a
                   onClick={() => setDrawerOpen(false)}
                   href={"/#topup"}
