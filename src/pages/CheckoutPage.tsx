@@ -83,6 +83,7 @@ export default function CheckoutPage() {
     const [isVerified, setIsVerified] = useState(false)
     const [ingameName, setIngameName] = useState('')
     const [selectedItem, setSelectedItem] = useState(null)
+    const [recentTxn, setRecentTxn] = useState(null)
     const navigate = useNavigate()
     const {toast} = useToast()
 
@@ -206,6 +207,15 @@ export default function CheckoutPage() {
             // console.log(result.data);
             setPassInfo(result.data)
             setLoading(false)
+            if(userInfo && token){
+                const res = await axios.get('https://coinstore-backend.onrender.com/api/buyer/transactions/all', {
+                    headers: {
+                    authorization: `Bearer ${token}`
+                    }
+                })
+                const recentTxns = res.data.transaction.filter((txn:any)=>{return txn.game === info.code})
+                if(recentTxns.length !== 0) setRecentTxn(recentTxns[recentTxns.length-1])
+            }
         } catch (err) {
             console.log(err)
         }
@@ -220,6 +230,9 @@ export default function CheckoutPage() {
 
     return (
         <div className=" px-10 md:px-20 pt-40 flex flex-col gap-8">
+            {userInfo && token && recentTxn &&
+                <Popup setUserId={setUserId} setServerId={setServerId} txn={recentTxn} setIsVerified={setIsVerified}/>
+            }
             <div className="flex flex-col lg:flex-row items-start gap-3">
                 <div className="flex flex-col sm:flex-row gap-10 w-[100%] lg:w-[60%]">
                     <div className="h-[200px] w-[250px]">
@@ -234,11 +247,11 @@ export default function CheckoutPage() {
                 <div className="bg-[#e3dbdb] dark:bg-[#091115] flex flex-col gap-3 items-center p-4 w-[80%] lg:w-[40%] rounded-xl">
                     <div className="grid w-full items-center gap-1.5">
                         <Label htmlFor="userID">UserID</Label>
-                        <Input type="text" id="userid" className="w-[100%]" placeholder="UserID" onChange={(e) => { setUserId(e.target.value) }} />
+                        <Input type="text" id="userid" className="w-[100%]" value={userId} placeholder="UserID" onChange={(e) => { setUserId(e.target.value) }} />
                     </div>
                     <div className="grid w-full  items-center gap-1.5">
                         <Label htmlFor="email" >ServerID (If any)</Label>
-                        <Input type="email" id="email" placeholder="Server ID ( If any )" onChange={(e) => { setServerId(e.target.value) }} />
+                        <Input type="email" id="email" placeholder="Server ID ( If any )" value={serverId} onChange={(e) => { setServerId(e.target.value) }} />
                     </div>
                     <Button onClick={handleVerification} disabled={isVerified}>{isVerified ? "Verified" : "Verify"}</Button>
                     {
@@ -317,3 +330,59 @@ export default function CheckoutPage() {
         </div>
     )
 }
+
+// import { useEffect, useState } from "react";
+
+const Popup = ({txn, setUserId, setServerId, setIsVerified}: {txn: any, setUserId: any, setServerId: any, setIsVerified: any}) => {
+  const [isOpen, setIsOpen] = useState(false);
+    const userId = txn.userid
+    const serverId = txn.serverid
+  useEffect(() => {
+    // Show popup when the page loads
+    setIsOpen(true);
+  }, []);
+
+  const closeModal = () => {
+    setIsOpen(false);
+  };
+
+  const handleOk = () => {
+    setServerId(serverId)
+    setUserId(userId)
+    setIsVerified(true);
+    setIsOpen(false);
+  };
+
+  return (
+    isOpen && (
+      <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+        <div className="bg-[#e3dbdb] dark:bg-[#091115] rounded-lg shadow-lg p-6 w-[90%] sm:w-[400px]">
+          <p className=" mb-4">
+            userID: {userId}<br/>
+            serverID: {serverId}
+          </p>
+          <h2 className="text-lg font-bold mb-4">Would you like to use this credentials!</h2>
+          {/* <p className="text-gray-700 mb-4">
+            This is a popup that appears when you land on the page.
+          </p> */}
+          <div className="flex gap-2">
+            <Button
+                onClick={handleOk}
+                size="sm"
+            >
+                OK
+            </Button>
+            <Button
+                onClick={closeModal}
+                size="sm"
+            >
+                Close
+            </Button>
+          </div>
+        </div>
+      </div>
+    )
+  );
+};
+
+// export default Popup;

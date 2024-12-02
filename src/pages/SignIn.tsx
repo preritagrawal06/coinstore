@@ -88,7 +88,7 @@ export default function SignIn(){
           <div className="col-span-6">
             <label htmlFor="Password" className="block text-sm font-medium text-gray-700"> Password </label>
 
-            <Input type="password" id="userid" className="w-[100%] text-black" onChange={(e)=>setPassword(e.target.value)} />
+            <Input type="password" id="pass" className="w-[100%] text-black" onChange={(e)=>setPassword(e.target.value)} />
           </div>
 
 
