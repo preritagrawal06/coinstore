@@ -103,7 +103,7 @@ export default function Navbar() {
 
   return (
     <div className="flex flex-row items-center justify-between bg-none w-[100%] absolute top-1 px-6 z-10 ">
-      <div className="h-[70px] bg-cover bg-inherit dark:bg-inherit rounded-md flex items-center gap-2">
+      <div className="h-[70px] bg-cover bg-[#0F1822] dark:bg-inherit rounded-md flex items-center gap-2">
         <a href="/">
           <img alt="Logo" src="/logo.png" style={{width:'80px'}}/>
         </a>
@@ -225,7 +225,7 @@ export default function Navbar() {
         >
           <Button
             onClick={() => setDrawerOpen(true)}
-            className="bg-inherit hover:bg-inherit "
+            className="bg-[#0F1822] hover:bg-inherit"
           >
             <HamburgerMenuIcon color="white" fontSize={"50px"} />
           </Button>

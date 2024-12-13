@@ -8,6 +8,7 @@ import SignUp from './pages/SignUp';
 import AllTopUpPage from './pages/AllTopUp';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import ContactUs from './pages/ContactUs';
+import Announcement from './pages/Announcement';
 
 function App() {
 
@@ -22,6 +23,7 @@ function App() {
             <Route path='/alltopup' element={<AllTopUpPage/>}/>
             <Route path='/policy' element={<PrivacyPolicy/>}/>
             <Route path='/contactus' element={<ContactUs/>}/>
+            <Route path='/announcement' element={<Announcement/>}/>
           </Route>
           <Route path='/login' element={<SignIn/>}/>
           <Route path='/signup' element={<SignUp/>}/>
