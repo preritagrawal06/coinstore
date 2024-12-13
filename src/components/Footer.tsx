@@ -20,6 +20,7 @@ export default function Footer(){
                     <p className="text-[14px] sm:text-[16px] md:text-[20px]"><a href="/">Home</a></p>
                     <p className="text-[14px] sm:text-[16px] md:text-[20px]"><a href="/#topup">Popular Games</a></p>
                     <p className="text-[14px] sm:text-[16px] md:text-[20px]"><a href="/#merchandie">Accesories</a></p>
+                    <p className="text-[14px] sm:text-[16px] md:text-[20px]"><a href="/announcement">Announcements</a></p>
                 </div>
             </div>
         </div>
