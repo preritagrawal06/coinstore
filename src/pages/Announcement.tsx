@@ -17,11 +17,21 @@ export default function Announcement(){
                 data.length>0 ? 
                 <div className="flex flex-col gap-4">
                     {
-                        data.map((x:any)=>
-                        <div className="flex flex-col gap-2 border dark:border-cyan-100 border-black p-2 rounded-md shadow-sm dark:shadow-slate-400 hover:shadow-md hover:shadow-black transition duration-300">
-                            <p className="text-[20px]">{x.title}</p>
-                            <p>{x.description}</p>
-                        </div>)
+                        data.map((x:any,index)=>{
+                            const time = new Date(x.createdAt)
+                            const day = time.getDate()
+                            const month = time.getMonth()
+                            const year = time.getFullYear()
+                            return(
+                                <div className="flex flex-col gap-2 border dark:border-cyan-100 border-black p-2 shadow-sm dark:shadow-slate-400 hover:shadow-md hover:shadow-black transition duration-300" key={index}>
+                            <div className="flex flex-row justify-between items-center">
+                            <p className="text-[20px] md:text-[24px] font-bold">{x.title}</p>
+                            <p>{`${day}-${month+1}-${year}`}</p>
+                            </div>
+                            <p className="text-[16px] md:text-[20px]">{x.description}</p>
+                        </div>
+                            )
+                        })
                     }
                 </div>
                 :

@@ -64,6 +64,7 @@ export default function Navbar() {
 
   function toggleDarkMode() {
     setDarkMode(!darkMode);
+    setDrawerOpen(false)
   }
 
   function logout() {
