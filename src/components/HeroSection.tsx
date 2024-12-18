@@ -15,9 +15,9 @@ export default function HeroSection(){
                 </div>
            <div className="flex flex-col items-center">
             <div className="text-center">
-                <p className="subtext">#No.1 website  for Game Pass</p>
+                <p className="subtext">#No.1 website  for Game TopUp</p>
                 <p className="head1">Play More, Pay Less:</p>
-                <p className="head1">Your Ultimate <span className="text-white dark:text-[#24FFF2]">Game Pass</span> Destination!</p>
+                <p className="head1">Your Ultimate <span className="text-white dark:text-[#24FFF2]">Game TopUp</span> Destination!</p>
             </div>
             {/* <div className="z-10">
                 <Button>Explore More <ArrowRight className="ml-2 h-4 w-4" /> </Button>

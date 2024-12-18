@@ -89,7 +89,7 @@ export default function GamePassSection() {
     ]
     return (
         <div className="flex flex-col gap-4 text-center p-6" id="topup">
-            <p className="font-PostSB text-black dark:text-white text-[20px] md:text-[24px] lg:text-[30px]">#Trending Game Passes</p>
+            <p className="font-PostSB text-black dark:text-white text-[20px] md:text-[24px] lg:text-[30px]">#Trending Game Topups</p>
             <Carousel
                 swipeable={false}
                 draggable={false}

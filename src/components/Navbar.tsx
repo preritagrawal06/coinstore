@@ -245,7 +245,7 @@ export default function Navbar() {
                 {token ? (
                   <div className="flex flex-col gap-2 items-center">
                     <Dialog>
-                      <DialogTrigger><Button className="m-0 w-20">{(user!.wallet as Number).toFixed(2)}</Button></DialogTrigger>
+                      <DialogTrigger><Button className="m-0 w-20">{(user!.wallet as Number).toFixed(2)} SC</Button></DialogTrigger>
                       <DialogContent>
                         <DialogDescription>
                           <div className="grid gap-4 py-4">

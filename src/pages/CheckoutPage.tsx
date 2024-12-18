@@ -231,7 +231,7 @@ export default function CheckoutPage() {
     return (
         <div className=" px-10 md:px-20 pt-40 flex flex-col gap-8">
             {userInfo && token && recentTxn &&
-                <Popup setUserId={setUserId} setServerId={setServerId} txn={recentTxn} setIsVerified={setIsVerified}/>
+                <Popup game={info.code} setUserId={setUserId} setServerId={setServerId} txn={recentTxn} setIsVerified={setIsVerified} setIngameName={setIngameName}/>
             }
             <div className="flex flex-col lg:flex-row items-start gap-3">
                 <div className="flex flex-col sm:flex-row gap-10 w-[100%] lg:w-[60%]">
@@ -333,7 +333,7 @@ export default function CheckoutPage() {
 
 // import { useEffect, useState } from "react";
 
-const Popup = ({txn, setUserId, setServerId, setIsVerified}: {txn: any, setUserId: any, setServerId: any, setIsVerified: any}) => {
+const Popup = ({game, txn, setUserId, setServerId, setIsVerified, setIngameName}: {game: any, txn: any, setUserId: any, setServerId: any, setIsVerified: any, setIngameName: any}) => {
   const [isOpen, setIsOpen] = useState(false);
     const userId = txn.userid
     const serverId = txn.serverid
@@ -346,11 +346,27 @@ const Popup = ({txn, setUserId, setServerId, setIsVerified}: {txn: any, setUserI
     setIsOpen(false);
   };
 
-  const handleOk = () => {
+  const handleOk = async() => {
     setServerId(serverId)
     setUserId(userId)
     setIsVerified(true);
     setIsOpen(false);
+    try {
+        if (userId.length <= 0) return
+        const { data } = await axios.post('https://coinstore-backend.onrender.com/api/topup/check-id', {
+            game: game,
+            userID: userId,
+            serverID: serverId
+        })
+
+        if (data.valid === 'valid') {
+            setIsVerified(true)
+            setIngameName(data.name)
+        }
+
+    } catch (error) {
+        console.log(error);
+    }
   };
 
   return (

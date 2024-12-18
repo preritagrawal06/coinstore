@@ -10,6 +10,9 @@ export default function LandingPage() {
         <GamePassSection/>
         <AccountSection/>
         <AccessoriesSection/>
+        <div className="fixed bottom-5 left-5 md:bottom-10 md:left-10 z-10">
+            <a href="https://api.whatsapp.com/send?phone=917217320257" target="_blank"><img src="/wp.svg" alt="" width="12px" height="12px"/></a>
+        </div>
        </div>
     )
 }

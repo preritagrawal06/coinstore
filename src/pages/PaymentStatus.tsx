@@ -96,14 +96,14 @@ const PaymentStatus = () => {
                                     </div>
                                     <div className="flex w-full justify-between">
                                         <p>OrderID</p>
-                                        <p>{status['data']['orderId']}</p>
+                                        <p>{(status['data']['orderId'] as string).split("-")[3]}</p>
                                     </div>
                                     <div className="flex w-full justify-between">
                                         <p>Username</p>
                                         <p>{status['data']['customerName']}</p>
                                     </div>
                                     <div className="flex w-full justify-between">
-                                        <p>character ID</p>
+                                        <p>Character ID</p>
                                         <p>{(status['data']['orderId'] as string).split("-")[0]}</p>
                                     </div>
                                     <div className="flex w-full justify-between">
