@@ -7,17 +7,35 @@ const PaymentStatus = () => {
     const [loading, setLoading] = useState(false)
     const queryString = new URLSearchParams(window.location.search)
     const orderId = queryString.get('orderId')
+    const mode = queryString.get('mode')
     const [status, setStatus] = useState()
+    const [ign, setIgn] = useState('')
     const [success, setSuccess] = useState(false)
     const [message, setMessage] = useState('Your Transaction will be completed soon')
     useEffect(() => {
         async function getStatus() {
             try {
                 setLoading(true)
-                const { data } = await axios.get(`https://coinstore-backend.onrender.com/api/payment/payment-status?orderId=${orderId}`)
-                console.log(data);
+                const { data } = await axios.get(`https://coinstore-backend.onrender.com/api/payment/payment-status?orderId=${orderId}&mode=${mode === 'wallet' ? 'wallet' : 'online'}`)
+                // console.log(data);
                 if(data.success){
                     setStatus(data)
+                    try {
+                        const { data:IGN } = await axios.post('https://coinstore-backend.onrender.com/api/topup/check-id', {
+                            game: mode === 'wallet' ? data['data']['game'] : (data['data']['orderId'] as String).split('-')[1],
+                            userID: mode === 'wallet' ? data['data']['userId'] : (data['data']['orderId'] as String).split('-')[0],
+                            serverID: mode === 'wallet' ? data['data']['serverId'] : (data['data']['orderId'] as String).split('-')[4],
+                        })
+                        // console.log(IGN);
+                        
+                        if (IGN.valid === 'valid') {
+                            // setIsVerified(true)
+                            setIgn(IGN.name)
+                        }
+            
+                    } catch (error) {
+                        console.log(error);
+                    }
                 }
                 if (data.success && data.data.status === "success") {
                     setSuccess(true)
@@ -30,7 +48,7 @@ const PaymentStatus = () => {
                                     authorization: `Bearer ${localStorage.getItem('token')}`
                                 }
                             })
-                            console.log(txnData);
+                            // console.log(txnData);
                             setMessage(txnData.message)
                             if(txnData.success && txnData.user){
                                 localStorage.setItem('user', JSON.stringify(txnData.user))
@@ -46,7 +64,7 @@ const PaymentStatus = () => {
                         const denom = orderDetails![2]
                         // const transactionTime = orderDetails![3]
                         const serverId = orderDetails!.length === 5 ? orderDetails![4] : undefined
-    
+                        
                         try {
                             const {data: txnData} = await axios.post('https://coinstore-backend.onrender.com/api/topup/create-topup-order',{
                                 userid: userId,
@@ -56,7 +74,7 @@ const PaymentStatus = () => {
                                 paymentData: data.data
                             })
                             console.log(txnData);
-    
+                            setMessage(txnData.message)
                         } catch (error) {
                             console.log(error);
                         }
@@ -96,7 +114,7 @@ const PaymentStatus = () => {
                                     </div>
                                     <div className="flex w-full justify-between">
                                         <p>OrderID</p>
-                                        <p>{(status['data']['orderId'] as string).split("-")[3]}</p>
+                                        <p>{(status['data']['orderId'] as string).split("-")[3] ? (status['data']['orderId'] as string).split("-")[3] : status['data']['orderId']}</p>
                                     </div>
                                     <div className="flex w-full justify-between">
                                         <p>Username</p>
@@ -104,7 +122,11 @@ const PaymentStatus = () => {
                                     </div>
                                     <div className="flex w-full justify-between">
                                         <p>Character ID</p>
-                                        <p>{(status['data']['orderId'] as string).split("-")[0]}</p>
+                                        <p>{mode === 'wallet' ? status['data']['userId'] : (status['data']['orderId'] as string).split("-")[0]}</p>
+                                    </div>
+                                    <div className="flex w-full justify-between">
+                                        <p>Character IGN</p>
+                                        <p>{ign}</p>
                                     </div>
                                     <div className="flex w-full justify-between">
                                         <p>Amount</p>
