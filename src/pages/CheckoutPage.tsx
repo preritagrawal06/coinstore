@@ -13,28 +13,32 @@ export default function CheckoutPage() {
         name: 'Mobile Legends',
         org: 'Moonton',
         img_url: '/mlbb.png',
-        sign: 'mlbb_global'
+        sign: 'mlbb_global',
+        currency: 'diamonds'
     },
     {
         ind: 2,
         name: 'PUBG Global',
         org: 'Krafton',
         img_url: '/pubg.jpg',
-        sign: 'pubgm'
+        sign: 'pubgm',
+        currency: "UC"
     },
     {
         ind: 3,
         name: 'Genshin Impact',
         org: 'MiHoYo',
         img_url: '/genshin.jpg',
-        sign: 'genshin'
+        sign: 'genshin',
+        currency: 'crystals'
     },
     {
         ind: 4,
         name: 'Clash of Clans',
         org: 'Supercell',
         img_url: '/coc.jpg',
-        sign: 'clashofclans'
+        sign: 'clashofclans',
+        currency: "coins"
     }, {
         ind: 5,
         name: 'Honkai:Star Rail',
@@ -47,7 +51,8 @@ export default function CheckoutPage() {
         name: 'Clash Royale',
         org: 'Supercell',
         img_url: '/cor.jpg',
-        sign: 'clashroyale'
+        sign: 'clashroyale',
+        currency: 'coins'
     },
     {
         ind: 7,
@@ -242,7 +247,7 @@ export default function CheckoutPage() {
                     <div>
                         <p className="subhead">{gameinfo ? gameinfo.name : 'Game_Name'}</p>
                         <p className="subtext1">{gameinfo ? gameinfo.org : 'Company_Name'}</p>
-                        <p className="subtext1">Get {gameinfo ? gameinfo.name : 'Game_Name'} Diamonds or the other passes instantly and at a very affordable price through Shadow Company now!</p>
+                        <p className="subtext1">Get {gameinfo ? gameinfo.name : 'Game_Name'} {passName} or the other passes instantly and at a very affordable price through Shadow Company now!</p>
                     </div>
                 </div>
                 <div className="bg-[#e3dbdb] dark:bg-[#091115] flex flex-col gap-3 items-center p-4 w-[80%] lg:w-[40%] rounded-xl">
