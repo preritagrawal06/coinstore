@@ -121,7 +121,7 @@ export default function CheckoutPage() {
             // }
             if(data.success && data.user){
                 localStorage.setItem('user', JSON.stringify(data.user))
-                window.location.href = `https://shadowcompany.com/status?orderId=${data.txn.orderid}&mode=wallet`
+                window.location.href = `https://shadowcompany.in/status?orderId=${data.txn.orderid}&mode=wallet`
             }
             toast({
                 description: data.message
