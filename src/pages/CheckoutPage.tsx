@@ -201,6 +201,22 @@ export default function CheckoutPage() {
             setPassImage("/coccoin.png")
             setPassName('Gold')
         }
+        else if(name == 'honkai_star_rail'){
+            setPassImage('/honkaipass.png')
+            setPassName('Star Rail')
+        }
+        else if(name == 'clashroyale'){
+            setPassImage('/corgem.png')
+            setPassName('Diamonds')
+        }
+        else if(name == 'farlight84'){
+            setPassImage('/farlightpass.png')
+            setPassName('Diamonds')
+        }
+        else if(name == 'super_sus'){
+            setPassImage('/supersusstar.png')
+            setPassName('Gold Star')
+        }
     }
 
     async function getData() {
