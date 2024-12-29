@@ -66,7 +66,7 @@ const PaymentStatus = () => {
                         const serverId = orderDetails!.length === 5 ? orderDetails![4] : undefined
                         
                         try {
-                            const {data: txnData} = await axios.post('http://localhost:8000/api/topup/create-topup-order',{
+                            const {data: txnData} = await axios.post('https://coinstore-backend.onrender.com/api/topup/create-topup-order',{
                                 userid: userId,
                                 game,
                                 serverid: serverId,
