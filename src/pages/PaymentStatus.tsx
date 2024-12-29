@@ -17,7 +17,7 @@ const PaymentStatus = () => {
             try {
                 setLoading(true)
                 const { data } = await axios.get(`https://coinstore-backend.onrender.com/api/payment/payment-status?orderId=${orderId}&mode=${mode === 'wallet' ? 'wallet' : 'online'}`)
-                // console.log(data);
+                console.log(data);
                 if(data.success){
                     setStatus(data)
                     try {
@@ -66,7 +66,7 @@ const PaymentStatus = () => {
                         const serverId = orderDetails!.length === 5 ? orderDetails![4] : undefined
                         
                         try {
-                            const {data: txnData} = await axios.post('https://coinstore-backend.onrender.com/api/topup/create-topup-order',{
+                            const {data: txnData} = await axios.post('http://localhost:8000/api/topup/create-topup-order',{
                                 userid: userId,
                                 game,
                                 serverid: serverId,
