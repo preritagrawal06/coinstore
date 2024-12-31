@@ -161,6 +161,9 @@ export default function CheckoutPage() {
             }
         } catch (error) {
             console.log(error);
+            toast({
+                description: "Kindly check your details"
+            })
         }
     }
 
