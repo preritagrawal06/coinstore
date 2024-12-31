@@ -180,6 +180,11 @@ export default function CheckoutPage() {
                 setIsVerified(true)
                 setIngameName(data.name)
             }
+            else if (data.valid !== 'valid') {
+                toast({
+                    description:"User is not found. Kindly check your detail"
+                })
+            }
 
         } catch (error) {
             console.log(error);
