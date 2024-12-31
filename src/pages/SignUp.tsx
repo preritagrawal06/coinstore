@@ -25,7 +25,7 @@ export default function SignUp(){
           })
           return 
         }
-        if(number.length<10 ){
+        if(number.length !== 10 ){
           toast({
             description: "Enter valid phone number",
           })
