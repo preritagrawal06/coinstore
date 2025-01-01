@@ -4,6 +4,9 @@ import axios from "axios";
 import { useToast } from "@/hooks/use-toast";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { InputOTP, InputOTPGroup, InputOTPSlot } from "@/components/ui/input-otp";
+import { REGEXP_ONLY_DIGITS } from "input-otp";
 
 
 export default function SignUp(){
@@ -13,6 +16,8 @@ export default function SignUp(){
     const [pwd,setPwd] = useState('')
     const [cnfPwd,setCnfPwd] = useState('')
     const [number,setNumber] = useState('')
+    const [open, setOpen] = useState(false)
+    const [value, setValue] = useState("")
 
     const navigate = useNavigate()
     const {toast} = useToast()
@@ -67,6 +72,10 @@ export default function SignUp(){
           })
         }
 
+    }
+    function otpModal(e:any) {
+      setOpen(true)
+      e.preventDefault()
     }
 
     return(
@@ -131,10 +140,35 @@ export default function SignUp(){
           <div className="col-span-6 sm:flex sm:items-center sm:gap-4">
           <Button
               className="inline-block shrink-0 rounded-md border border-blue-600 bg-blue-600 px-12 py-3 text-lg font-medium text-white transition hover:bg-transparent hover:text-blue-600 focus:outline-none focus:ring active:text-blue-500"
-              onClick={authUser}
+              onClick={otpModal}
             >
               Create an account
             </Button>
+            <Dialog open={open} onOpenChange={()=>setOpen(false)} >
+                  <DialogContent style={{height:'fit-content'}}>
+                    <DialogHeader>
+                    <DialogTitle className="font-PostSB text-[20px]">
+                    Mobile Phone Verification
+                    </DialogTitle>
+                    <DialogDescription className="font-PostSB text-[16px]">
+                    Enter the 6-digit verification code that was sent to your phone number.
+                    </DialogDescription>
+                    </DialogHeader>
+                  <InputOTP maxLength={6} onChange={(e)=>setValue(e)} pattern={REGEXP_ONLY_DIGITS}>
+                    <InputOTPGroup>
+                      <InputOTPSlot index={0} />
+                      <InputOTPSlot index={1} />
+                      <InputOTPSlot index={2} />
+                      <InputOTPSlot index={3} />
+                      <InputOTPSlot index={4} />
+                      <InputOTPSlot index={5} />
+                    </InputOTPGroup>
+                  </InputOTP>
+                  <DialogFooter>
+                    <Button  className="m-0 font-bold bg-cyan-600 hover:bg-cyan-800 text-white" >Submit</Button>
+                  </DialogFooter>
+                  </DialogContent>
+                </Dialog>
 
             <p className="mt-4 text-sm text-gray-500 sm:mt-0">
               Already have an account?
