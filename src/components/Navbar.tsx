@@ -201,14 +201,18 @@ export default function Navbar() {
                 </DialogDescription>
               </DialogContent>
             </Dialog>
-            <Button className="m-0 font-bold" variant={"primary"} onClick={logout}>
-              <a href="/">Logout</a>
-            </Button>
+            <a href="/">
+              <Button className="m-0 font-bold" variant={"primary"} onClick={logout}>
+                Logout
+              </Button>
+            </a>
           </div>
         ) : (
-          <Button className="m-0 font-bold" variant={"primary"}>
-            <a href="/login">Login</a>
-          </Button>
+          <a href="/login">
+            <Button className="m-0 font-bold" variant={"primary"}>
+              Login
+            </Button>
+          </a>
         )}
         <Switch
           className="data-[state=checked]:bg-[#ffbf00] data-[state=unchecked]:bg-[#123456]"
@@ -295,14 +299,18 @@ export default function Navbar() {
                         </DialogDescription>
                       </DialogContent>
                     </Dialog>
-                    <Button className="m-0 font-bold w-20" onClick={logout}>
-                      <a href="/">Logout</a>
-                    </Button>
+                    <a href="/">
+                      <Button className="m-0 font-bold w-20" onClick={logout}>
+                        Logout
+                      </Button>
+                    </a>
                   </div>
                 ) : (
-                  <Button className="m-0 font-bold">
-                    <a href="/login">Login</a>
-                  </Button>
+                  <a href="/login">
+                    <Button className="m-0 font-bold">
+                      Login
+                    </Button>
+                  </a>
                 )}
                 {
           user &&
