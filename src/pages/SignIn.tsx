@@ -103,7 +103,7 @@ export default function SignIn() {
       })
       // console.log(data);
       toast({
-        description: data.msg
+        description: data.msg || data.message
       })
       setOpen(true)
     } catch (error) {
@@ -152,7 +152,7 @@ export default function SignIn() {
       const {data} = await axios.post('https://coinstore-backend.onrender.com/api/user/resendOtp',{
         credential
       })
-      console.log(data);
+      // console.log(data);
       toast({
         description: data.msg
       })
