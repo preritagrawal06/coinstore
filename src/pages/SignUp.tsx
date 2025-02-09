@@ -103,7 +103,12 @@ export default function SignUp() {
       })
       return
     }
-    
+    if(name.length < 5){
+      toast({
+        description: "Name should be atleast 5 characters long"
+      })
+      return
+    }
     if(!validatePhoneNumber(number)){
       toast({
         description: "Please enter 10 digit valid phone number"
