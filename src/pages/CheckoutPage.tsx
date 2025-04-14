@@ -96,9 +96,9 @@ export default function CheckoutPage() {
         // console.log(userInfo);
 
         try {
-            if (!isVerified || userInfo.username.length <= 0 || userInfo.email.length <= 0 || userInfo.phone.length <= 0 || userId.length <= 0 || !selectedItem) return
+            // if (!isVerified || userInfo.username.length <= 0 || userInfo.email.length <= 0 || userInfo.phone.length <= 0 || userId.length <= 0 || !selectedItem) return
             console.log(selectedItem);
-            
+            return
             const { data } = await axios.post('https://coinstore-backend.onrender.com/api/buyer/wallet/topup', {
                 userid: userId,
                 amount: selectedItem!['amount'],
@@ -350,7 +350,7 @@ export default function CheckoutPage() {
                     {
                         token && 
                         <>
-                            <Button className="w-[100%]" onClick={handleWalletPayment} disabled={!isVerified}>{!isVerified ? "Verify your in-game ID first" : "Pay using wallet"}</Button>
+                            <Button className="w-[100%]" onClick={handleWalletPayment} disabled={isVerified}>{!isVerified ? "Verify your in-game ID first" : "Pay using wallet"}</Button>
                             <p>OR</p>
                         </>
                     }
